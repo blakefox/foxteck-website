@@ -1,0 +1,72 @@
+---
+interface Props {
+  images?: string[];
+  videos?: string[];
+  title: string;
+}
+
+const { images = [], videos = [], title } = Astro.props;
+const hasMedia = (images?.length ?? 0) > 0 || (videos?.length ?? 0) > 0;
+---
+
+{hasMedia && (
+  <div class="mt-10">
+    <h2 class="text-lg font-semibold mb-4" style="color: var(--text-primary);">Media</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+      {images?.map((src) => (
+        <div class="rounded-lg overflow-hidden border" style="border-color: var(--border);">
+          <img src={src} alt={title} class="w-full h-auto object-cover" loading="lazy" />
+        </div>
+      ))}
+
+      {videos?.map((src, i) => (
+        <div
+          class="video-thumb rounded-lg overflow-hidden border relative cursor-pointer group"
+          style="border-color: var(--border); background: #000; aspect-ratio: 16/9;"
+          data-src={src}
+        >
+          <!-- Thumbnail state -->
+          <video
+            class="thumb-preview w-full h-full object-cover"
+            src={src}
+            preload="metadata"
+            muted
+            style="pointer-events: none;"
+          />
+          <!-- Play overlay -->
+          <div class="thumb-overlay absolute inset-0 flex flex-col items-center justify-center gap-2 transition-opacity duration-150" style="background: rgba(0,0,0,0.45);">
+            <div class="w-14 h-14 rounded-full flex items-center justify-center transition-transform duration-150 group-hover:scale-110" style="background: rgba(192,74,26,0.9);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <span class="text-xs font-medium text-white opacity-80">Click to play</span>
+          </div>
+          <!-- Inline player (hidden until clicked) -->
+          <video
+            class="inline-player absolute inset-0 w-full h-full hidden"
+            src={src}
+            controls
+            preload="none"
+          />
+        </div>
+      ))}
+
+    </div>
+  </div>
+)}
+
+<script is:inline>
+  document.querySelectorAll('.video-thumb').forEach(function(thumb) {
+    thumb.addEventListener('click', function() {
+      var overlay  = thumb.querySelector('.thumb-overlay');
+      var preview  = thumb.querySelector('.thumb-preview');
+      var player   = thumb.querySelector('.inline-player');
+      if (!player || player.classList.contains('hidden') === false) return;
+      overlay.style.display  = 'none';
+      preview.style.display  = 'none';
+      player.classList.remove('hidden');
+      player.play();
+      thumb.style.cursor = 'default';
+    });
+  });
+</script>

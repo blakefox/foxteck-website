@@ -1,0 +1,170 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MediaGallery from '../../components/projects/MediaGallery.astro';
+import VideoEmbed from '../../components/projects/VideoEmbed.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((p) => ({ params: { slug: p.slug }, props: { project: p } }));
+}
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { title, company, role, startYear, endYear, tags, heroImage, heroVideo, youtubeUrls, images, videos, externalUrl } = project.data;
+const { Content } = await project.render();
+
+const yearRange = `${startYear} – ${endYear === 'present' ? 'Present' : endYear}`;
+
+const allProjects = await getCollection('projects');
+const sorted = allProjects.sort((a, b) => a.data.order - b.data.order);
+const idx = sorted.findIndex((p) => p.slug === project.slug);
+const prev = idx > 0 ? sorted[idx - 1] : null;
+const next = idx < sorted.length - 1 ? sorted[idx + 1] : null;
+---
+
+<BaseLayout title={`${title} — Blake Fox`} description={project.data.summary} ogImage={heroImage}>
+
+  <!-- Hero -->
+  {heroVideo ? (
+    <div class="w-full bg-black" style="aspect-ratio: 16/9; max-height: 75vh; overflow: hidden;">
+      <video
+        src={heroVideo}
+        autoplay
+        muted
+        loop
+        playsinline
+        poster={heroImage}
+        style="width: 100%; height: 100%; object-fit: contain;"
+      />
+    </div>
+  ) : heroImage ? (
+    <div class="w-full bg-black overflow-hidden" style="max-height: 420px;">
+      <img src={heroImage} alt={title} class="w-full object-cover" style="max-height: 420px;" />
+    </div>
+  ) : youtubeUrls && youtubeUrls.length > 0 ? (
+    <div class="w-full" style="background-color: var(--bg-secondary);">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 py-6">
+        <div style="position: relative; aspect-ratio: 16/9;">
+          {(() => {
+            const m = youtubeUrls[0].match(/(?:v=|youtu\.be\/|shorts\/)([a-zA-Z0-9_-]{11})/);
+            const id = m ? m[1] : null;
+            return id ? (
+              <iframe
+                src={`https://www.youtube.com/embed/${id}`}
+                title={title}
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                style="position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 0.75rem;"
+              />
+            ) : null;
+          })()}
+        </div>
+      </div>
+    </div>
+  ) : null}
+
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 py-10">
+
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-xs mb-6" style="color: var(--text-secondary);">
+      <a href="/projects" class="hover:underline" style="color: var(--accent);">Work</a>
+      <span>/</span>
+      <span>{company}</span>
+      <span>/</span>
+      <span style="color: var(--text-primary);">{title}</span>
+    </nav>
+
+    <!-- Header -->
+    <div class="mb-8">
+      <div class="flex flex-wrap items-center gap-3 mb-3">
+        <span
+          class="text-xs font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full border"
+          style="color: var(--highlight); border-color: var(--highlight); background: rgba(192,74,26,0.08);"
+        >
+          {company}
+        </span>
+        <span class="text-xs" style="color: var(--text-secondary);">{yearRange}</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-2" style="color: var(--text-primary);">{title}</h1>
+      <p class="text-base" style="color: var(--text-secondary);">{role}</p>
+
+      <!-- Tags -->
+      <div class="flex flex-wrap gap-2 mt-4">
+        {tags.map((tag) => (
+          <span
+            class="text-xs px-2.5 py-1 rounded-md"
+            style="background-color: var(--accent-subtle); color: var(--accent);"
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
+
+      <!-- External link -->
+      {externalUrl && (
+        <a
+          href={externalUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 mt-4 text-sm font-medium"
+          style="color: var(--accent);"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Visit Project Site
+        </a>
+      )}
+    </div>
+
+    <!-- Description body -->
+    <div
+      class="prose prose-invert max-w-none"
+      style="color: var(--text-secondary); --tw-prose-body: var(--text-secondary); --tw-prose-headings: var(--text-primary); --tw-prose-bold: var(--text-primary); --tw-prose-links: var(--accent);"
+    >
+      <Content />
+    </div>
+
+    <!-- YouTube embeds -->
+    {youtubeUrls && youtubeUrls.length > 0 && (
+      <div class="mt-10">
+        <h2 class="text-lg font-semibold mb-4" style="color: var(--text-primary);">Video</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {youtubeUrls.map((url) => (
+            <VideoEmbed url={url} title={title} />
+          ))}
+        </div>
+      </div>
+    )}
+
+    <!-- Media gallery -->
+    <MediaGallery
+      images={(images || []).filter((img) => img !== heroImage)}
+      videos={[
+        ...(heroVideo ? [heroVideo] : []),
+        ...(videos || []).filter((v) => v !== heroVideo),
+      ]}
+      title={title}
+    />
+
+    <!-- Prev / Next -->
+    <nav class="mt-14 pt-8 border-t flex justify-between gap-4" style="border-color: var(--border);">
+      {prev ? (
+        <a href={`/projects/${prev.slug}`} class="flex flex-col gap-1 group max-w-xs">
+          <span class="text-xs uppercase tracking-widest" style="color: var(--text-secondary);">← Previous</span>
+          <span class="text-sm font-medium group-hover:underline" style="color: var(--text-primary);">{prev.data.title}</span>
+        </a>
+      ) : <div />}
+      {next ? (
+        <a href={`/projects/${next.slug}`} class="flex flex-col gap-1 group text-right max-w-xs ml-auto">
+          <span class="text-xs uppercase tracking-widest" style="color: var(--text-secondary);">Next →</span>
+          <span class="text-sm font-medium group-hover:underline" style="color: var(--text-primary);">{next.data.title}</span>
+        </a>
+      ) : <div />}
+    </nav>
+
+  </div>
+</BaseLayout>

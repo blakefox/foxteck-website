@@ -1,0 +1,163 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/projects/ProjectCard.astro';
+
+const allProjects = await getCollection('projects');
+const projects = allProjects.sort((a, b) => b.data.order - a.data.order);
+
+const domains = ['all', 'ai', 'hardware', 'games', 'web', 'medical', 'leadership', 'firmware', 'startup'];
+const companies = [
+  { slug: 'all',     label: 'All Companies' },
+  { slug: 'ikin',    label: 'IKIN' },
+  { slug: 'faceware',label: 'Faceware' },
+  { slug: 'ibm',     label: 'IBM' },
+  { slug: 'madcatz', label: 'Madcatz' },
+  { slug: 'foxteck', label: 'Foxteck' },
+  { slug: 'hia',     label: 'HIA' },
+];
+---
+
+<BaseLayout
+  title="Work — Blake Fox"
+  description="Projects and products built by Blake Fox across AI, hardware, games, healthcare, and enterprise technology."
+>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+
+    <!-- Header -->
+    <div class="mb-10">
+      <p class="text-xs font-semibold uppercase tracking-widest mb-2" style="color: var(--highlight);">Portfolio</p>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-3" style="color: var(--text-primary);">Work</h1>
+      <p class="text-base max-w-xl" style="color: var(--text-secondary);">
+        14 projects across 9 companies — AI platforms, hardware startups, enterprise systems, games, and medical technology.
+      </p>
+    </div>
+
+    <!-- Filters -->
+    <div class="mb-8 space-y-3">
+      <!-- Domain filter -->
+      <div class="flex flex-wrap gap-2" id="domain-filters">
+        {domains.map((d) => (
+          <button
+            class="filter-btn domain-btn px-3 py-1.5 rounded-md text-xs font-semibold uppercase tracking-wide border transition-colors duration-150"
+            data-filter={d}
+            data-active={d === 'all' ? 'true' : 'false'}
+            style={d === 'all'
+              ? 'background-color: var(--accent); color: #fff; border-color: var(--accent);'
+              : 'background: transparent; color: var(--text-secondary); border-color: var(--border);'}
+          >
+            {d === 'all' ? 'All Domains' : d}
+          </button>
+        ))}
+      </div>
+
+      <!-- Company filter -->
+      <div class="flex flex-wrap gap-2" id="company-filters">
+        {companies.map((c) => (
+          <button
+            class="filter-btn company-btn px-3 py-1.5 rounded-md text-xs font-medium border transition-colors duration-150"
+            data-filter={c.slug}
+            data-active={c.slug === 'all' ? 'true' : 'false'}
+            style={c.slug === 'all'
+              ? 'background-color: var(--highlight); color: #fff; border-color: var(--highlight);'
+              : 'background: transparent; color: var(--text-secondary); border-color: var(--border);'}
+          >
+            {c.label}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <!-- Results count -->
+    <p class="text-xs mb-6" style="color: var(--text-secondary);">
+      Showing <span id="result-count">{projects.length}</span> of {projects.length} projects
+    </p>
+
+    <!-- Grid -->
+    <div id="project-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {projects.map((project) => (
+        <ProjectCard project={project} />
+      ))}
+    </div>
+
+    <!-- Empty state -->
+    <div id="empty-state" class="hidden py-20 text-center">
+      <p class="text-base" style="color: var(--text-secondary);">No projects match the selected filters.</p>
+      <button
+        onclick="resetFilters()"
+        class="mt-4 text-sm underline"
+        style="color: var(--accent);"
+      >
+        Clear filters
+      </button>
+    </div>
+
+  </div>
+</BaseLayout>
+
+<script is:inline>
+  var activeDomain  = 'all';
+  var activeCompany = 'all';
+
+  function applyFilters() {
+    var cards = document.querySelectorAll('.project-card');
+    var visible = 0;
+
+    cards.forEach(function(card) {
+      var domains = (card.dataset.domains || '').split(' ');
+      var company = card.dataset.company || '';
+      var domainMatch  = activeDomain  === 'all' || domains.includes(activeDomain);
+      var companyMatch = activeCompany === 'all' || company === activeCompany;
+      var show = domainMatch && companyMatch;
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+
+    var countEl = document.getElementById('result-count');
+    var emptyEl = document.getElementById('empty-state');
+    var gridEl  = document.getElementById('project-grid');
+    if (countEl) countEl.textContent = visible;
+    if (emptyEl) emptyEl.classList.toggle('hidden', visible > 0);
+    if (gridEl)  gridEl.style.display = visible > 0 ? '' : 'none';
+  }
+
+  function setActiveBtn(group, activeFilter, activeStyle, inactiveStyle) {
+    document.querySelectorAll('.' + group).forEach(function(btn) {
+      var isActive = btn.dataset.filter === activeFilter;
+      btn.dataset.active = isActive ? 'true' : 'false';
+      btn.style.cssText = isActive ? activeStyle : inactiveStyle;
+    });
+  }
+
+  document.querySelectorAll('.domain-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      activeDomain = btn.dataset.filter;
+      setActiveBtn(
+        'domain-btn', activeDomain,
+        'background-color: var(--accent); color: #fff; border-color: var(--accent);',
+        'background: transparent; color: var(--text-secondary); border-color: var(--border);'
+      );
+      applyFilters();
+    });
+  });
+
+  document.querySelectorAll('.company-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      activeCompany = btn.dataset.filter;
+      setActiveBtn(
+        'company-btn', activeCompany,
+        'background-color: var(--highlight); color: #fff; border-color: var(--highlight);',
+        'background: transparent; color: var(--text-secondary); border-color: var(--border);'
+      );
+      applyFilters();
+    });
+  });
+
+  function resetFilters() {
+    activeDomain  = 'all';
+    activeCompany = 'all';
+    setActiveBtn('domain-btn',  'all', 'background-color: var(--accent); color: #fff; border-color: var(--accent);',    'background: transparent; color: var(--text-secondary); border-color: var(--border);');
+    setActiveBtn('company-btn', 'all', 'background-color: var(--highlight); color: #fff; border-color: var(--highlight);', 'background: transparent; color: var(--text-secondary); border-color: var(--border);');
+    applyFilters();
+  }
+</script>

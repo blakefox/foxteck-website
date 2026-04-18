@@ -1,0 +1,110 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { title, company, companySlug, role, startYear, endYear, tags, domains, summary, heroImage, heroVideo } = project.data;
+
+const yearRange = `${startYear} – ${endYear === 'present' ? 'Present' : endYear}`;
+
+const companyColors: Record<string, string> = {
+  ikin:    '#4A9EBF',
+  faceware:'#C04A1A',
+  ibm:     '#6AB8D4',
+  madcatz: '#8B949E',
+  foxteck: '#E8620A',
+  hia:     '#4A9EBF',
+};
+const badgeColor = companyColors[companySlug] ?? '#8B949E';
+---
+
+<article
+  class="project-card group rounded-xl overflow-hidden border transition-all duration-200 flex flex-col hover:-translate-y-1 hover:shadow-xl"
+  style="background-color: var(--bg-surface); border-color: var(--border);"
+  data-domains={domains.join(' ')}
+  data-company={companySlug}
+>
+  <!-- Media preview -->
+  <a href={`/projects/${project.slug}`} class="block relative aspect-video overflow-hidden bg-black">
+    {heroVideo ? (
+      <video
+        src={heroVideo}
+        muted
+        loop
+        playsinline
+        preload="none"
+        poster={heroImage}
+        class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+        onmouseenter="this.play()"
+        onmouseleave="this.pause()"
+      />
+    ) : heroImage ? (
+      <img
+        src={heroImage}
+        alt={title}
+        class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+        loading="lazy"
+      />
+    ) : (
+      <div class="w-full h-full flex items-center justify-center" style="background-color: var(--bg-secondary);">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="color: var(--border);">
+          <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+        </svg>
+      </div>
+    )}
+    <!-- Play indicator for video -->
+    {heroVideo && (
+      <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+        <div class="w-12 h-12 rounded-full flex items-center justify-center" style="background: rgba(0,0,0,0.6);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+      </div>
+    )}
+  </a>
+
+  <!-- Content -->
+  <div class="flex flex-col flex-1 p-4 gap-3">
+    <div class="flex items-start justify-between gap-2">
+      <div>
+        <a href={`/projects/${project.slug}`} class="block">
+          <h3 class="font-semibold text-base leading-snug hover:underline" style="color: var(--text-primary);">{title}</h3>
+        </a>
+        <p class="text-xs mt-0.5" style="color: var(--text-secondary);">{role}</p>
+      </div>
+      <span
+        class="shrink-0 text-xs font-semibold px-2 py-0.5 rounded-full"
+        style={`color: ${badgeColor}; background: ${badgeColor}22; border: 1px solid ${badgeColor}44;`}
+      >
+        {company.split(' ')[0]}
+      </span>
+    </div>
+
+    <p class="text-sm leading-relaxed flex-1" style="color: var(--text-secondary);">{summary}</p>
+
+    <div class="flex flex-wrap gap-1.5">
+      {tags.slice(0, 4).map((tag) => (
+        <span
+          class="text-xs px-2 py-0.5 rounded"
+          style="background-color: var(--accent-subtle); color: var(--accent);"
+        >
+          {tag}
+        </span>
+      ))}
+    </div>
+
+    <div class="flex items-center justify-between pt-1 border-t" style="border-color: var(--border);">
+      <span class="text-xs" style="color: var(--text-secondary);">{yearRange}</span>
+      <a
+        href={`/projects/${project.slug}`}
+        class="text-xs font-medium flex items-center gap-1 transition-colors"
+        style="color: var(--accent);"
+      >
+        View Project
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</article>
