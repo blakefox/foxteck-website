@@ -7,6 +7,40 @@ const allProjects = await getCollection('projects');
 const projects = allProjects.sort((a, b) => b.data.order - a.data.order);
 
 const domains = ['all', 'ai', 'hardware', 'games', 'web', 'medical', 'leadership', 'firmware', 'startup'];
+
+const techTags = [
+  // AI / ML
+  { label: 'Claude AI',       group: 'ai' },
+  { label: 'Agentic AI',      group: 'ai' },
+  { label: 'MCP',             group: 'ai' },
+  { label: 'Generative AI',   group: 'ai' },
+  { label: 'Computer Vision', group: 'ai' },
+  { label: 'Machine Learning',group: 'ai' },
+  { label: 'TensorFlow',      group: 'ai' },
+  { label: 'Watson AI',       group: 'ai' },
+  { label: 'NLP',             group: 'ai' },
+  // Languages / Frameworks
+  { label: 'C++',             group: 'lang' },
+  { label: 'React',           group: 'lang' },
+  { label: 'Node.js',         group: 'lang' },
+  { label: 'Three.js',        group: 'lang' },
+  { label: 'WebGL',           group: 'lang' },
+  { label: 'Unity',           group: 'lang' },
+  { label: 'Android',         group: 'lang' },
+  // Media / Hardware
+  { label: 'OpenCV',          group: 'media' },
+  { label: 'FFmpeg',          group: 'media' },
+  { label: 'SDK',             group: 'media' },
+  { label: 'Firmware',        group: 'media' },
+  { label: 'Hardware',        group: 'media' },
+  // Cloud / Infra
+  { label: 'Azure',           group: 'cloud' },
+  { label: 'AWS',             group: 'cloud' },
+  { label: 'DevOps',          group: 'cloud' },
+  { label: 'SOC2',            group: 'cloud' },
+  { label: 'HIPAA',           group: 'cloud' },
+];
+
 const companies = [
   { slug: 'all',     label: 'All Companies' },
   { slug: 'ikin',    label: 'IKIN' },
@@ -66,11 +100,39 @@ const companies = [
           </button>
         ))}
       </div>
+
+      <!-- Tech stack filter -->
+      <div class="pt-1">
+        <div class="flex items-center gap-3 mb-2">
+          <p class="text-xs font-semibold uppercase tracking-widest" style="color: var(--text-secondary);">Tech Stack</p>
+          <button
+            id="clear-tags-btn"
+            class="hidden text-xs underline underline-offset-2 transition-colors"
+            style="color: var(--accent);"
+            onclick="clearTags()"
+          >
+            Clear
+          </button>
+        </div>
+        <div class="flex flex-wrap gap-2" id="tag-filters">
+          {techTags.map((t) => (
+            <button
+              class="tag-btn px-2.5 py-1 rounded text-xs font-medium border transition-colors duration-150"
+              data-tag={t.label.toLowerCase()}
+              data-active="false"
+              style="background: transparent; color: var(--text-secondary); border-color: var(--border);"
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
+      </div>
     </div>
 
     <!-- Results count -->
     <p class="text-xs mb-6" style="color: var(--text-secondary);">
       Showing <span id="result-count">{projects.length}</span> of {projects.length} projects
+      <span id="tag-summary" class="hidden"> — filtered by <span id="tag-summary-text"></span></span>
     </p>
 
     <!-- Grid -->
@@ -98,27 +160,41 @@ const companies = [
 <script is:inline>
   var activeDomain  = 'all';
   var activeCompany = 'all';
+  var activeTags    = new Set();
 
   function applyFilters() {
     var cards = document.querySelectorAll('.project-card');
     var visible = 0;
 
     cards.forEach(function(card) {
-      var domains = (card.dataset.domains || '').split(' ');
-      var company = card.dataset.company || '';
+      var domains     = (card.dataset.domains || '').split(' ');
+      var company     = card.dataset.company || '';
+      var cardTags    = (card.dataset.tags || '').split('|||');
       var domainMatch  = activeDomain  === 'all' || domains.includes(activeDomain);
       var companyMatch = activeCompany === 'all' || company === activeCompany;
-      var show = domainMatch && companyMatch;
+      var tagMatch     = activeTags.size === 0 || Array.from(activeTags).some(function(t) {
+        return cardTags.includes(t);
+      });
+      var show = domainMatch && companyMatch && tagMatch;
       card.style.display = show ? '' : 'none';
       if (show) visible++;
     });
 
-    var countEl = document.getElementById('result-count');
-    var emptyEl = document.getElementById('empty-state');
-    var gridEl  = document.getElementById('project-grid');
+    var countEl   = document.getElementById('result-count');
+    var emptyEl   = document.getElementById('empty-state');
+    var gridEl    = document.getElementById('project-grid');
+    var summaryEl = document.getElementById('tag-summary');
+    var summaryTx = document.getElementById('tag-summary-text');
+    var clearBtn  = document.getElementById('clear-tags-btn');
+
     if (countEl) countEl.textContent = visible;
     if (emptyEl) emptyEl.classList.toggle('hidden', visible > 0);
     if (gridEl)  gridEl.style.display = visible > 0 ? '' : 'none';
+
+    var hasTags = activeTags.size > 0;
+    if (summaryEl) summaryEl.classList.toggle('hidden', !hasTags);
+    if (summaryTx) summaryTx.textContent = Array.from(activeTags).join(', ');
+    if (clearBtn)  clearBtn.classList.toggle('hidden', !hasTags);
   }
 
   function setActiveBtn(group, activeFilter, activeStyle, inactiveStyle) {
@@ -153,11 +229,56 @@ const companies = [
     });
   });
 
+  document.querySelectorAll('.tag-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var tag = btn.dataset.tag;
+      if (activeTags.has(tag)) {
+        activeTags.delete(tag);
+        btn.dataset.active = 'false';
+        btn.style.cssText = 'background: transparent; color: var(--text-secondary); border-color: var(--border);';
+      } else {
+        activeTags.add(tag);
+        btn.dataset.active = 'true';
+        btn.style.cssText = 'background-color: var(--accent-subtle); color: var(--accent); border-color: var(--accent);';
+      }
+      applyFilters();
+    });
+  });
+
+  function clearTags() {
+    activeTags.clear();
+    document.querySelectorAll('.tag-btn').forEach(function(btn) {
+      btn.dataset.active = 'false';
+      btn.style.cssText = 'background: transparent; color: var(--text-secondary); border-color: var(--border);';
+    });
+    applyFilters();
+  }
+
+  // Card tag pills — clicking a tag on a card activates that tag filter
+  document.querySelectorAll('.card-tag').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      var tag = btn.dataset.tag;
+      if (!activeTags.has(tag)) {
+        activeTags.add(tag);
+        // Sync the filter row button if it exists
+        document.querySelectorAll('.tag-btn').forEach(function(fb) {
+          if (fb.dataset.tag === tag) {
+            fb.dataset.active = 'true';
+            fb.style.cssText = 'background-color: var(--accent-subtle); color: var(--accent); border-color: var(--accent);';
+          }
+        });
+        applyFilters();
+      }
+      document.getElementById('tag-filters').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  });
+
   function resetFilters() {
     activeDomain  = 'all';
     activeCompany = 'all';
+    clearTags();
     setActiveBtn('domain-btn',  'all', 'background-color: var(--accent); color: #fff; border-color: var(--accent);',    'background: transparent; color: var(--text-secondary); border-color: var(--border);');
     setActiveBtn('company-btn', 'all', 'background-color: var(--highlight); color: #fff; border-color: var(--highlight);', 'background: transparent; color: var(--text-secondary); border-color: var(--border);');
-    applyFilters();
   }
 </script>
