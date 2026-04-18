@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Foxteck — Industrial Color Palette</title>
+  <style>
+    /* ── Logo-Extracted Brand Colors ──────────────────── */
+    :root {
+      --brand-shadow:   #1A0805;
+      --brand-brown:    #4A1C08;
+      --brand-rust:     #C04A1A;
+      --brand-amber:    #E8620A;
+      --brand-cream:    #F0E0CC;
+    }
+
+    /* ── Dark Mode ────────────────────────────────────── */
+    :root[data-theme="dark"] {
+      --bg-primary:     #0D1117;
+      --bg-secondary:   #161B22;
+      --bg-surface:     #21262D;
+      --border:         #30363D;
+      --text-primary:   #E6EDF3;
+      --text-secondary: #8B949E;
+      --accent:         #4A9EBF;
+      --accent-hover:   #6AB8D4;
+      --accent-subtle:  #0F2830;
+      --highlight:      #C04A1A;
+      --highlight-hover:#E8620A;
+    }
+
+    /* ── Light Mode ───────────────────────────────────── */
+    :root[data-theme="light"] {
+      --bg-primary:     #F5F0EC;
+      --bg-secondary:   #FFFFFF;
+      --bg-surface:     #EDE8E3;
+      --border:         #CCC5BC;
+      --text-primary:   #1A0D07;
+      --text-secondary: #6B5C50;
+      --accent:         #1A6B8A;
+      --accent-hover:   #145A75;
+      --accent-subtle:  #D8EDF5;
+      --highlight:      #B8461A;
+      --highlight-hover:#CC5A20;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      min-height: 100vh;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    header {
+      background-color: var(--bg-secondary);
+      border-bottom: 2px solid var(--highlight);
+      padding: 1.25rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .header-left img {
+      height: 56px;
+      width: auto;
+    }
+
+    .header-title h1 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+
+    .header-title span {
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .toggle-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      padding: 0.5rem 1.1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+      white-space: nowrap;
+    }
+
+    .toggle-btn:hover {
+      background: var(--accent-subtle);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+
+    .section-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── Logo Context Strip ───────────────────────────── */
+    .logo-context {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 3rem;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .logo-tile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.75rem 1rem 1rem;
+      gap: 0.75rem;
+    }
+
+    .logo-tile img { height: 90px; width: auto; }
+
+    .logo-tile-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.55;
+      padding-bottom: 0.75rem;
+    }
+
+    /* ── Palette Grids ────────────────────────────────── */
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .swatch {
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--bg-secondary);
+    }
+
+    .swatch-color { height: 72px; width: 100%; }
+
+    .swatch-info { padding: 0.7rem; }
+
+    .swatch-name {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.2rem;
+    }
+
+    .swatch-hex {
+      font-size: 0.68rem;
+      font-family: 'Courier New', monospace;
+      color: var(--text-secondary);
+    }
+
+    .swatch-role {
+      font-size: 0.62rem;
+      color: var(--highlight);
+      margin-top: 0.3rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .swatch-role.blue { color: var(--accent); }
+
+    /* ── Demo Cards ───────────────────────────────────── */
+    .demo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 3rem;
+    }
+
+    @media (max-width: 640px) {
+      .demo-grid { grid-template-columns: 1fr; }
+      .logo-context { grid-template-columns: 1fr; }
+    }
+
+    .demo-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.4rem;
+    }
+
+    .demo-card h3 {
+      font-size: 0.92rem;
+      color: var(--text-primary);
+      margin-bottom: 0.35rem;
+    }
+
+    .demo-card p {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin-bottom: 1rem;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      padding: 0.45rem 1.1rem;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-right: 0.5rem;
+    }
+
+    .btn-primary:hover { background: var(--accent-hover); }
+
+    .btn-highlight {
+      display: inline-block;
+      background: var(--highlight);
+      color: #fff;
+      padding: 0.45rem 1.1rem;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-highlight:hover { background: var(--highlight-hover); }
+
+    .btn-ghost {
+      display: inline-block;
+      background: transparent;
+      color: var(--accent);
+      padding: 0.45rem 1.1rem;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border: 1px solid var(--accent);
+      cursor: pointer;
+    }
+
+    .tag {
+      display: inline-block;
+      background: var(--accent-subtle);
+      color: var(--accent);
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-right: 0.35rem;
+    }
+
+    /* ── CSS Token Block ──────────────────────────────── */
+    .css-block {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .css-block pre {
+      font-family: 'Courier New', monospace;
+      font-size: 0.76rem;
+      color: var(--text-secondary);
+      line-height: 1.85;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-left">
+      <img src="Content/Personal/Foxteck_Website_Company_Logo.png" alt="Foxteck Logo" />
+      <div class="header-title">
+        <h1>Foxteck — Color Palette</h1>
+        <span>Industrial Steel &amp; Blue &nbsp;·&nbsp; Logo-Matched</span>
+      </div>
+    </div>
+    <button class="toggle-btn" onclick="toggleTheme()">Toggle Mode</button>
+  </header>
+
+  <main>
+
+    <!-- Logo in context -->
+    <p class="section-label">Logo on Site Backgrounds</p>
+    <div class="logo-context">
+      <div class="logo-tile" style="background:#0D1117; color:#E6EDF3;">
+        <img src="Content/Personal/Foxteck_Website_Company_Logo.png" alt="Logo on Steel Black" />
+        <span class="logo-tile-label">Steel Black — BG Primary</span>
+      </div>
+      <div class="logo-tile" style="background:#21262D; color:#E6EDF3;">
+        <img src="Content/Personal/Foxteck_Website_Company_Logo.png" alt="Logo on Steel Surface" />
+        <span class="logo-tile-label">Steel Surface — Cards</span>
+      </div>
+      <div class="logo-tile" style="background:#F5F0EC; color:#1A0D07;">
+        <img src="Content/Personal/Foxteck_Website_Company_Logo.png" alt="Logo on Light BG" />
+        <span class="logo-tile-label">Warm Off-White — Light Mode</span>
+      </div>
+    </div>
+
+    <!-- Brand Colors (from logo) -->
+    <p class="section-label">Brand Colors — Extracted from Logo</p>
+    <div class="palette-grid">
+      <div class="swatch">
+        <div class="swatch-color" style="background:#1A0805;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Brand Shadow</div>
+          <div class="swatch-hex">#1A0805</div>
+          <div class="swatch-role">Letterform Depth</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#4A1C08;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Brand Brown</div>
+          <div class="swatch-hex">#4A1C08</div>
+          <div class="swatch-role">Logo Structure</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#C04A1A;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Fox Rust</div>
+          <div class="swatch-hex">#C04A1A</div>
+          <div class="swatch-role">Primary Highlight</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#E8620A;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Fox Amber</div>
+          <div class="swatch-hex">#E8620A</div>
+          <div class="swatch-role">Eyes / Hover / CTA</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#F0E0CC; border-bottom: 1px solid #CCC5BC;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Fox Cream</div>
+          <div class="swatch-hex">#F0E0CC</div>
+          <div class="swatch-role">Muzzle / Light Accent</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Site Palette -->
+    <p class="section-label">Site Palette — Industrial Steel &amp; Blue</p>
+    <div class="palette-grid">
+      <div class="swatch">
+        <div class="swatch-color" style="background:#0D1117;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Steel Black</div>
+          <div class="swatch-hex">#0D1117</div>
+          <div class="swatch-role blue">Dark BG Primary</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#161B22;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Steel Dark</div>
+          <div class="swatch-hex">#161B22</div>
+          <div class="swatch-role blue">Dark BG Secondary</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#21262D;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Steel Surface</div>
+          <div class="swatch-hex">#21262D</div>
+          <div class="swatch-role blue">Cards / Panels</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#30363D;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Steel Border</div>
+          <div class="swatch-hex">#30363D</div>
+          <div class="swatch-role blue">Dividers</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#8B949E;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Silver Muted</div>
+          <div class="swatch-hex">#8B949E</div>
+          <div class="swatch-role blue">Secondary Text</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#4A9EBF;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Steel Teal</div>
+          <div class="swatch-hex">#4A9EBF</div>
+          <div class="swatch-role blue">Dark Accent / Links</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#1A6B8A;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Steel Teal Deep</div>
+          <div class="swatch-hex">#1A6B8A</div>
+          <div class="swatch-role blue">Light Accent / Links</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#F5F0EC;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Warm Off-White</div>
+          <div class="swatch-hex">#F5F0EC</div>
+          <div class="swatch-role blue">Light BG Primary</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- UI Demo -->
+    <p class="section-label">UI Component Preview</p>
+    <div class="demo-grid">
+      <div class="demo-card">
+        <h3>Project Card</h3>
+        <p>Industrial-grade full-stack engineering. Built for performance, designed with intent.</p>
+        <span class="tag">React</span>
+        <span class="tag">Node</span>
+        <span class="tag">AI</span>
+      </div>
+      <div class="demo-card">
+        <h3>Call to Action</h3>
+        <p>Teal accent for navigation, Fox Amber for primary CTAs — warm brand color commands attention.</p>
+        <button class="btn-primary">View Work</button>
+        <button class="btn-highlight">Hire Me</button>
+      </div>
+      <div class="demo-card">
+        <h3>Ghost / Secondary</h3>
+        <p>Secondary actions use ghost style. The teal border stays readable against both dark and warm-light backgrounds.</p>
+        <button class="btn-ghost">Download CV</button>
+      </div>
+      <div class="demo-card">
+        <h3>Typography</h3>
+        <p style="color:var(--text-primary); font-size:1rem; font-weight:700; margin-bottom:0.3rem;">Primary — E6EDF3 / 1A0D07</p>
+        <p style="margin-bottom:0.3rem;">Secondary — 8B949E / 6B5C50</p>
+        <p style="color:var(--accent); font-size:0.8rem; margin-bottom:0.2rem;">Teal link — Steel Teal</p>
+        <p style="color:var(--highlight); font-size:0.8rem;">Highlight — Fox Rust</p>
+      </div>
+    </div>
+
+    <!-- CSS Tokens -->
+    <p class="section-label">CSS Design Tokens</p>
+    <div class="css-block">
+      <pre id="css-output"></pre>
+    </div>
+
+  </main>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      html.setAttribute('data-theme', html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+      renderTokens();
+    }
+
+    function renderTokens() {
+      const theme = document.documentElement.getAttribute('data-theme');
+      const brand = [
+        ['/* Brand (from logo) */', ''],
+        ['--brand-shadow',   '#1A0805'],
+        ['--brand-brown',    '#4A1C08'],
+        ['--brand-rust',     '#C04A1A'],
+        ['--brand-amber',    '#E8620A'],
+        ['--brand-cream',    '#F0E0CC'],
+      ];
+      const site = theme === 'dark' ? [
+        ['/* Dark Mode */', ''],
+        ['--bg-primary',     '#0D1117'],
+        ['--bg-secondary',   '#161B22'],
+        ['--bg-surface',     '#21262D'],
+        ['--border',         '#30363D'],
+        ['--text-primary',   '#E6EDF3'],
+        ['--text-secondary', '#8B949E'],
+        ['--accent',         '#4A9EBF'],
+        ['--accent-hover',   '#6AB8D4'],
+        ['--accent-subtle',  '#0F2830'],
+        ['--highlight',      '#C04A1A'],
+        ['--highlight-hover','#E8620A'],
+      ] : [
+        ['/* Light Mode */', ''],
+        ['--bg-primary',     '#F5F0EC'],
+        ['--bg-secondary',   '#FFFFFF'],
+        ['--bg-surface',     '#EDE8E3'],
+        ['--border',         '#CCC5BC'],
+        ['--text-primary',   '#1A0D07'],
+        ['--text-secondary', '#6B5C50'],
+        ['--accent',         '#1A6B8A'],
+        ['--accent-hover',   '#145A75'],
+        ['--accent-subtle',  '#D8EDF5'],
+        ['--highlight',      '#B8461A'],
+        ['--highlight-hover','#CC5A20'],
+      ];
+
+      const all = [...brand, ...site];
+      const lines = [':root {'];
+      all.forEach(([name, val]) => {
+        if (val === '') {
+          lines.push(`\n  ${name}`);
+        } else {
+          lines.push(`  ${name.padEnd(20)}: ${val};`);
+        }
+      });
+      lines.push('}');
+      document.getElementById('css-output').textContent = lines.join('\n');
+    }
+
+    renderTokens();
+  </script>
+
+</body>
+</html>
