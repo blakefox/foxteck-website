@@ -1,0 +1,39 @@
+---
+interface Props {
+  icon: string;
+  title: string;
+  description: string;
+  useCases: string[];
+}
+
+const { icon, title, description, useCases } = Astro.props;
+---
+
+<div
+  class="rounded-xl border p-6 flex flex-col gap-4 transition-colors duration-150"
+  style="background-color: var(--bg-surface); border-color: var(--border); border-left: 3px solid var(--accent);"
+>
+  <div class="flex items-start gap-4">
+    <div
+      class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 text-xl"
+      style="background-color: var(--accent-subtle); color: var(--accent);"
+    >
+      {icon}
+    </div>
+    <div>
+      <h3 class="text-base font-bold mb-1" style="color: var(--text-primary);">{title}</h3>
+      <p class="text-sm leading-relaxed" style="color: var(--text-secondary);">{description}</p>
+    </div>
+  </div>
+
+  {useCases.length > 0 && (
+    <ul class="flex flex-col gap-1 pl-1">
+      {useCases.map((uc) => (
+        <li class="flex items-start gap-2 text-xs" style="color: var(--text-secondary);">
+          <span style="color: var(--accent); margin-top: 1px;">›</span>
+          {uc}
+        </li>
+      ))}
+    </ul>
+  )}
+</div>

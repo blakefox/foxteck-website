@@ -1,0 +1,152 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const products = [
+  {
+    name: 'Grading Assistant',
+    description: 'AI-powered academic grading tool that automates rubric-based scoring and feedback generation, dramatically reducing grading time for educators.',
+    tags: ['Claude AI', 'Education', 'Automation'],
+  },
+  {
+    name: 'Livestalk',
+    description: 'Livestock management platform combining IoT sensor data, computer vision, and AI analytics to help ranchers monitor herd health and optimize operations.',
+    tags: ['IoT', 'Computer Vision', 'Agriculture'],
+  },
+  {
+    name: 'True Value Hub Consulting',
+    description: 'Fractional CTO engagement driving 2x developer velocity in 90 days through structured AI adoption, MCP server integration, and engineering pipeline hardening.',
+    tags: ['Fractional CTO', 'AI Adoption', 'Agentic AI'],
+  },
+];
+
+const engagementModel = [
+  { step: '01', label: 'Discovery Call', detail: 'A 30-minute conversation to understand your challenge, team, and goals.' },
+  { step: '02', label: 'Scoped Proposal', detail: 'A clear engagement scope, timeline, and outcome-based deliverables.' },
+  { step: '03', label: 'Embedded Work', detail: 'Regular cadence: strategy sessions, code, and direct team collaboration.' },
+  { step: '04', label: 'Measurable Outcomes', detail: 'Every engagement ends with documented results and a clear handoff.' },
+];
+---
+
+<BaseLayout
+  title="About Foxteck Innovations"
+  description="Foxteck Innovations Inc — technical leadership, AI consulting, and product engineering founded by Blake Fox."
+  section="company"
+>
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 py-12">
+
+    <!-- Header -->
+    <div class="mb-12 max-w-3xl">
+      <p class="text-xs font-semibold uppercase tracking-widest mb-2 section-label" style="color: var(--accent);">About</p>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4" style="color: var(--text-primary);">Foxteck Innovations Inc</h1>
+      <p class="text-base leading-relaxed mb-4" style="color: var(--text-secondary);">
+        Foxteck Innovations is a technical consulting and product engineering firm founded by Blake Fox. We partner with startups, scale-ups, and enterprise teams to close the gap between ambitious technology goals and engineering reality.
+      </p>
+      <p class="text-base leading-relaxed" style="color: var(--text-secondary);">
+        We specialize in three things: embedding experienced technical leadership at the fractional level, accelerating AI adoption with structure and rigor, and building production-grade products from scratch. Every engagement is outcome-driven — we show up to move the needle, not just advise.
+      </p>
+    </div>
+
+    <!-- Founder section -->
+    <div class="rounded-2xl border p-6 sm:p-8 mb-12 flex flex-col sm:flex-row gap-6 items-start" style="background-color: var(--bg-surface); border-color: var(--border);">
+      <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden border-2 shrink-0" style="border-color: var(--accent);">
+        <img
+          src="/assets/personal/blake-fox-headshot.png"
+          alt="Blake Fox — Founder, Foxteck Innovations"
+          class="w-full h-full object-cover"
+        />
+      </div>
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-widest mb-1 section-label" style="color: var(--accent);">Founder</p>
+        <h2 class="text-xl font-bold mb-2" style="color: var(--text-primary);">Blake Fox</h2>
+        <p class="text-sm leading-relaxed mb-3" style="color: var(--text-secondary);">
+          15+ years of engineering leadership across IBM, Faceware Technologies, Madcatz/Saitek, IKIN Technologies, and HIA Medical. Blake has shipped hardware-software products across AI, games, medical, and enterprise — and now brings that experience directly to clients as Foxteck's principal.
+        </p>
+        <div class="flex flex-wrap gap-2">
+          {['Fractional CTO', 'AI Architecture', 'Product Engineering', 'Team Leadership', 'Speaker'].map((tag) => (
+            <span
+              class="px-2 py-0.5 rounded text-xs font-medium"
+              style="background-color: var(--accent-subtle); color: var(--accent);"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Products & Engagements -->
+    <div class="mb-12">
+      <p class="text-xs font-semibold uppercase tracking-widest mb-2 section-label" style="color: var(--accent);">What We've Built</p>
+      <h2 class="text-2xl font-bold mb-6" style="color: var(--text-primary);">Products & Engagements</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+        {products.map((p) => (
+          <div
+            class="rounded-xl border p-5 flex flex-col gap-3"
+            style="background-color: var(--bg-surface); border-color: var(--border); border-top: 2px solid var(--accent);"
+          >
+            <h3 class="text-base font-bold" style="color: var(--text-primary);">{p.name}</h3>
+            <p class="text-sm leading-relaxed flex-1" style="color: var(--text-secondary);">{p.description}</p>
+            <div class="flex flex-wrap gap-1.5 mt-auto">
+              {p.tags.map((tag) => (
+                <span
+                  class="px-2 py-0.5 rounded text-xs font-medium"
+                  style="background-color: var(--accent-subtle); color: var(--accent);"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Engagement model -->
+    <div class="mb-12">
+      <p class="text-xs font-semibold uppercase tracking-widest mb-2 section-label" style="color: var(--accent);">How It Works</p>
+      <h2 class="text-2xl font-bold mb-6" style="color: var(--text-primary);">Engagement Model</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {engagementModel.map((e) => (
+          <div class="flex gap-4 items-start p-4 rounded-xl border" style="background-color: var(--bg-surface); border-color: var(--border);">
+            <span class="text-2xl font-bold shrink-0" style="color: var(--accent); opacity: 0.5;">{e.step}</span>
+            <div>
+              <p class="text-sm font-bold mb-1" style="color: var(--text-primary);">{e.label}</p>
+              <p class="text-sm leading-relaxed" style="color: var(--text-secondary);">{e.detail}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="rounded-2xl border p-8 text-center" style="background-color: var(--bg-surface); border-color: var(--border);">
+      <p class="text-xs font-semibold uppercase tracking-widest mb-3 section-label" style="color: var(--accent);">Let's Work Together</p>
+      <h2 class="text-2xl font-bold mb-3" style="color: var(--text-primary);">Ready to engage Foxteck?</h2>
+      <p class="text-sm leading-relaxed mb-6 max-w-md mx-auto" style="color: var(--text-secondary);">
+        Whether you need fractional CTO leadership, an AI strategy, or a product built — we'd love to hear what you're working on.
+      </p>
+      <div class="flex flex-wrap gap-3 justify-center">
+        <a
+          href="/contact?type=foxteck"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-md font-semibold text-white text-sm transition-colors duration-150"
+          style="background-color: var(--accent);"
+          onmouseover="this.style.backgroundColor='var(--accent-hover)'"
+          onmouseout="this.style.backgroundColor='var(--accent)'"
+        >
+          Start a Conversation
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a
+          href="/services"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-md font-semibold text-sm border transition-colors duration-150"
+          style="border-color: var(--accent); color: var(--accent); background: transparent;"
+          onmouseover="this.style.background='var(--accent-subtle)'"
+          onmouseout="this.style.background='transparent'"
+        >
+          View Services
+        </a>
+      </div>
+    </div>
+
+  </div>
+</BaseLayout>

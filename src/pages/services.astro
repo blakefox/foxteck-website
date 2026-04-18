@@ -1,0 +1,122 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ServiceCard from '../components/services/ServiceCard.astro';
+
+const services = [
+  {
+    icon: '🧭',
+    title: 'Fractional CTO',
+    description: 'Embedded part-time technical leadership — strategy, team building, roadmap, vendor decisions, and hands-on execution when it matters.',
+    useCases: [
+      'Early-stage startups that need senior technical leadership without a full-time hire',
+      'Scaling engineering orgs navigating growth pains or technical direction changes',
+      'Boards and investors who need a trusted technical voice during critical decisions',
+    ],
+  },
+  {
+    icon: '🤖',
+    title: 'AI & Agentic Consulting',
+    description: 'LLM integration, agentic workflow design, Claude API, MCP server architecture, and structured AI adoption programs for engineering teams.',
+    useCases: [
+      'Teams that want to ship AI features but don\'t know where to start',
+      'Companies building LLM-powered workflows, RAG pipelines, or AI agents',
+      'Engineering orgs looking to measurably accelerate velocity through AI tooling',
+    ],
+  },
+  {
+    icon: '🏗️',
+    title: 'Full-Stack Product Builds',
+    description: 'End-to-end product development from architecture through Azure deployment — React frontends, Claude-powered agentic backends, CI/CD pipelines.',
+    useCases: [
+      'Startups needing an experienced builder to take an idea from 0 to launch',
+      'Companies that want a proof-of-concept built quickly by someone who\'s done it before',
+      'Existing products that need a trusted partner for a major feature or rearchitecture',
+    ],
+  },
+  {
+    icon: '🎤',
+    title: 'Speaking & Advisory',
+    description: 'Conference speaking (InfoComm, ITExpo), board advisory, investor technical diligence, and executive AI strategy briefings.',
+    useCases: [
+      'Conference organizers looking for experienced speakers on AI, agentic systems, or hardware-software convergence',
+      'Investors who need a technical advisor during diligence on AI or software companies',
+      'Executive teams that need a credible AI strategy narrative for their board or stakeholders',
+    ],
+  },
+  {
+    icon: '📐',
+    title: 'Strategic Technical Advisory',
+    description: 'Scaling engineering orgs, technical vision alignment, compliance readiness (SOC2, HIPAA), and bridging complex technology to non-technical stakeholders.',
+    useCases: [
+      'Companies navigating SOC2 or HIPAA compliance without dedicated security leadership',
+      'Founders who need help articulating their technical vision to investors or acquirers',
+      'Organizations where a gap exists between engineering capability and business execution',
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Services — Foxteck Innovations"
+  description="Foxteck Innovations offers Fractional CTO leadership, AI & agentic consulting, full-stack product builds, and strategic technical advisory."
+  section="company"
+>
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 py-12">
+
+    <!-- Header -->
+    <div class="mb-12">
+      <p class="text-xs font-semibold uppercase tracking-widest mb-2 section-label" style="color: var(--accent);">Foxteck Innovations</p>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4" style="color: var(--text-primary);">Services</h1>
+      <p class="text-base max-w-2xl leading-relaxed" style="color: var(--text-secondary);">
+        Foxteck provides embedded technical leadership, AI product consulting, and end-to-end product engineering — from seed-stage startups to enterprise teams navigating AI adoption.
+      </p>
+    </div>
+
+    <!-- Service cards -->
+    <div class="flex flex-col gap-6 mb-16">
+      {services.map((s) => (
+        <ServiceCard
+          icon={s.icon}
+          title={s.title}
+          description={s.description}
+          useCases={s.useCases}
+        />
+      ))}
+    </div>
+
+    <!-- CTA -->
+    <div class="rounded-2xl border p-8 sm:p-10" style="background-color: var(--bg-surface); border-color: var(--border);">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 items-center">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-widest mb-2 section-label" style="color: var(--accent);">Ready to start?</p>
+          <h2 class="text-2xl font-bold mb-3" style="color: var(--text-primary);">Let's talk about what you're building.</h2>
+          <p class="text-sm leading-relaxed" style="color: var(--text-secondary);">
+            Every engagement starts with a conversation. Tell me what you're working on and where you're stuck — we'll figure out together if there's a fit.
+          </p>
+        </div>
+        <div class="flex flex-col gap-3 sm:items-end">
+          <a
+            href="/contact?type=foxteck"
+            class="inline-flex items-center gap-2 px-6 py-3 rounded-md font-semibold text-white text-sm transition-colors duration-150"
+            style="background-color: var(--accent);"
+            onmouseover="this.style.backgroundColor='var(--accent-hover)'"
+            onmouseout="this.style.backgroundColor='var(--accent)'"
+          >
+            Start a Conversation
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a
+            href="/foxteck"
+            class="inline-flex items-center gap-2 px-6 py-3 rounded-md font-semibold text-sm border transition-colors duration-150"
+            style="border-color: var(--border); color: var(--text-secondary); background: transparent;"
+            onmouseover="this.style.borderColor='var(--accent)'; this.style.color='var(--accent)'"
+            onmouseout="this.style.borderColor='var(--border)'; this.style.color='var(--text-secondary)'"
+          >
+            About Foxteck
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</BaseLayout>
