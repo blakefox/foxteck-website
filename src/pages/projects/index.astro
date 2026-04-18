@@ -101,8 +101,8 @@ const companies = [
         ))}
       </div>
 
-      <!-- Tech stack filter -->
-      <div class="pt-1">
+      <!-- Tech stack filter (hidden until ready to launch) -->
+      <div class="pt-1 hidden">
         <div class="flex items-center gap-3 mb-2">
           <p class="text-xs font-semibold uppercase tracking-widest" style="color: var(--text-secondary);">Tech Stack</p>
           <button
@@ -132,7 +132,7 @@ const companies = [
     <!-- Results count -->
     <p class="text-xs mb-6" style="color: var(--text-secondary);">
       Showing <span id="result-count">{projects.length}</span> of {projects.length} projects
-      <span id="tag-summary" class="hidden"> — filtered by <span id="tag-summary-text"></span></span>
+      <span id="tag-summary" class="hidden" style="display:none !important"> — filtered by <span id="tag-summary-text"></span></span>
     </p>
 
     <!-- Grid -->
