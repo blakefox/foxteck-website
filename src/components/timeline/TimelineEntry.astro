@@ -1,0 +1,76 @@
+---
+import type { TimelineStop } from '../../data/timeline';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  stop: TimelineStop;
+  projects: CollectionEntry<'projects'>[];
+  index: number;
+}
+
+const { stop, projects, index } = Astro.props;
+const isRight = index % 2 === 0;
+const yearRange = `${stop.startYear} – ${stop.endYear === 'present' ? 'Present' : stop.endYear}`;
+const linkedProjects = stop.projectSlugs
+  .map((slug) => projects.find((p) => p.slug === slug))
+  .filter(Boolean) as CollectionEntry<'projects'>[];
+---
+
+<!-- Mobile: always stacked; Desktop: alternating left/right -->
+<div class={`relative flex items-start gap-4 md:gap-0 ${isRight ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+
+  <!-- Content card -->
+  <div class={`flex-1 md:w-[calc(50%-2rem)] ${isRight ? 'md:pr-12' : 'md:pl-12'} ${!isRight ? 'md:text-right' : ''}`}>
+    <div
+      class="rounded-xl border p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
+      style="background-color: var(--bg-surface); border-color: var(--border);"
+    >
+      <!-- Year range -->
+      <p class="text-xs font-mono mb-2" style="color: var(--highlight);">{yearRange}</p>
+
+      <!-- Company & Role -->
+      <h3 class="text-base font-bold mb-0.5" style="color: var(--text-primary);">{stop.company}</h3>
+      <p class="text-sm mb-3" style="color: var(--accent);">{stop.role}</p>
+      <p class="text-xs mb-1" style="color: var(--text-secondary);">{stop.location}</p>
+
+      <!-- Description -->
+      <p class="text-sm leading-relaxed mt-3" style="color: var(--text-secondary);">{stop.description}</p>
+
+      <!-- Highlight badge -->
+      {stop.highlight && (
+        <p class="text-xs mt-3 font-medium" style="color: var(--highlight);">
+          ★ {stop.highlight}
+        </p>
+      )}
+
+      <!-- Project links -->
+      {linkedProjects.length > 0 && (
+        <div class={`flex flex-wrap gap-2 mt-4 ${!isRight ? 'md:justify-end' : ''}`}>
+          {linkedProjects.map((p) => (
+            <a
+              href={`/projects/${p.slug}`}
+              class="text-xs px-2.5 py-1 rounded-md border transition-colors duration-150 flex items-center gap-1"
+              style="border-color: var(--accent); color: var(--accent); background: transparent;"
+              onmouseover="this.style.background='var(--accent-subtle)'"
+              onmouseout="this.style.background='transparent'"
+            >
+              {p.data.title}
+              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
+
+  <!-- Center dot (desktop) / left dot (mobile) -->
+  <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 top-5 z-10 items-center justify-center">
+    <div class="w-4 h-4 rounded-full border-2 border-[#C04A1A]" style="background-color: var(--bg-primary);"></div>
+  </div>
+  <div class="md:hidden shrink-0 mt-1.5">
+    <div class="w-3 h-3 rounded-full border-2 border-[#C04A1A]" style="background-color: var(--bg-primary);"></div>
+  </div>
+
+  <!-- Empty side spacer (desktop) -->
+  <div class="hidden md:block flex-1"></div>
+</div>

@@ -1,0 +1,333 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Contact — Blake Fox / Foxteck Innovations"
+  description="Get in touch with Blake Fox or Foxteck Innovations for VP of Engineering, CTO, fractional technical leadership, or project consulting opportunities."
+>
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 py-12">
+
+    <!-- Tab switcher -->
+    <div class="mb-10">
+      <p class="text-xs font-semibold uppercase tracking-widest mb-4" style="color: var(--text-secondary);">I'm reaching out about…</p>
+      <div class="flex flex-wrap gap-3" id="contact-tabs">
+        <button
+          id="tab-foxteck"
+          class="contact-tab px-5 py-2.5 rounded-md font-semibold text-sm border transition-colors duration-150"
+          style="background-color: var(--accent); color: #fff; border-color: var(--accent);"
+          data-target="panel-foxteck"
+        >
+          Engage Foxteck
+        </button>
+        <button
+          id="tab-blake"
+          class="contact-tab px-5 py-2.5 rounded-md font-semibold text-sm border transition-colors duration-150"
+          style="background: transparent; color: var(--text-secondary); border-color: var(--border);"
+          data-target="panel-blake"
+        >
+          Hire Blake
+        </button>
+      </div>
+    </div>
+
+    <!-- Panel: Foxteck -->
+    <div id="panel-foxteck" class="contact-panel">
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-12">
+
+        <!-- Left: info -->
+        <div class="lg:col-span-2">
+          <p class="text-xs font-semibold uppercase tracking-widest mb-3" style="color: var(--accent);">Foxteck Innovations</p>
+          <h1 class="text-3xl sm:text-4xl font-bold mb-4" style="color: var(--text-primary);">Let's Build Together</h1>
+          <p class="text-base leading-relaxed mb-8" style="color: var(--text-secondary);">
+            Looking for a Fractional CTO, an AI strategy, or a product built end-to-end? Tell us what you're working on and we'll figure out if there's a fit.
+          </p>
+
+          <div class="space-y-4">
+            <a href="mailto:bfox1981@gmail.com" class="flex items-center gap-3 text-sm font-medium transition-colors" style="color: var(--text-secondary);"
+              onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-secondary)'">
+              <div class="w-9 h-9 rounded-md flex items-center justify-center" style="background-color: var(--bg-surface); border: 1px solid var(--border);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              bfox1981@gmail.com
+            </a>
+            <a href="https://www.linkedin.com/in/blake-fox/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-sm font-medium transition-colors" style="color: var(--text-secondary);"
+              onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-secondary)'">
+              <div class="w-9 h-9 rounded-md flex items-center justify-center" style="background-color: var(--bg-surface); border: 1px solid var(--border);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 23.2 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              </div>
+              LinkedIn Profile
+            </a>
+            <a href="/services" class="flex items-center gap-3 text-sm font-medium transition-colors" style="color: var(--text-secondary);"
+              onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-secondary)'">
+              <div class="w-9 h-9 rounded-md flex items-center justify-center" style="background-color: var(--bg-surface); border: 1px solid var(--border);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </div>
+              View Foxteck Services
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: form -->
+        <div class="lg:col-span-3">
+          <div class="rounded-2xl border p-6 sm:p-8" style="background-color: var(--bg-surface); border-color: var(--border);">
+            <h2 class="text-lg font-semibold mb-6" style="color: var(--text-primary);">Foxteck Engagement Inquiry</h2>
+            <form id="form-foxteck" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="space-y-5" novalidate>
+              <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+              <input type="hidden" name="_subject" value="Foxteck Engagement Inquiry" />
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div>
+                  <label for="ft-name" class="block text-xs font-semibold uppercase tracking-widest mb-2" style="color: var(--text-secondary);">Name <span style="color: var(--accent);">*</span></label>
+                  <input type="text" id="ft-name" name="name" required placeholder="Your name"
+                    class="w-full px-4 py-2.5 rounded-md border text-sm transition-colors duration-150 outline-none"
+                    style="background-color: var(--bg-primary); border-color: var(--border); color: var(--text-primary);"
+                    onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'" />
+                </div>
+                <div>
+                  <label for="ft-email" class="block text-xs font-semibold uppercase tracking-widest mb-2" style="color: var(--text-secondary);">Email <span style="color: var(--accent);">*</span></label>
+                  <input type="email" id="ft-email" name="email" required placeholder="your@email.com"
+                    class="w-full px-4 py-2.5 rounded-md border text-sm transition-colors duration-150 outline-none"
+                    style="background-color: var(--bg-primary); border-color: var(--border); color: var(--text-primary);"
+                    onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'" />
+                </div>
+              </div>
+
+              <div>
+                <label for="ft-company" class="block text-xs font-semibold uppercase tracking-widest mb-2" style="color: var(--text-secondary);">Company / Organization</label>
+                <input type="text" id="ft-company" name="company" placeholder="Your company (optional)"
+                  class="w-full px-4 py-2.5 rounded-md border text-sm transition-colors duration-150 outline-none"
+                  style="background-color: var(--bg-primary); border-color: var(--border); color: var(--text-primary);"
+                  onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'" />
+              </div>
+
+              <div>
+                <label for="ft-engagement" class="block text-xs font-semibold uppercase tracking-widest mb-2" style="color: var(--text-secondary);">Type of Engagement</label>
+                <select id="ft-engagement" name="engagement_type"
+                  class="w-full px-4 py-2.5 rounded-md border text-sm transition-colors duration-150 outline-none"
+                  style="background-color: var(--bg-primary); border-color: var(--border); color: var(--text-primary);"
+                  onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+                  <option value="">Select an engagement type…</option>
+                  <option value="fractional-cto">Fractional CTO</option>
+                  <option value="ai-consulting">AI & Agentic Consulting</option>
+                  <option value="product-build">Full-Stack Product Build</option>
+                  <option value="advisory">Speaking / Advisory</option>
+                  <option value="strategic">Strategic Technical Advisory</option>
+                  <option value="other">Other / Not Sure Yet</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="ft-message" class="block text-xs font-semibold uppercase tracking-widest mb-2" style="color: var(--text-secondary);">Message <span style="color: var(--accent);">*</span></label>
+                <textarea id="ft-message" name="message" required rows="5"
+                  placeholder="Tell us about your project, challenge, or opportunity…"
+                  class="w-full px-4 py-2.5 rounded-md border text-sm transition-colors duration-150 outline-none resize-vertical"
+                  style="background-color: var(--bg-primary); border-color: var(--border); color: var(--text-primary);"
+                  onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'"></textarea>
+              </div>
+
+              <button type="submit" id="ft-submit"
+                class="inline-flex items-center gap-2 px-6 py-3 rounded-md font-semibold text-white text-sm transition-colors duration-150"
+                style="background-color: var(--accent);"
+                onmouseover="this.style.backgroundColor='var(--accent-hover)'"
+                onmouseout="this.style.backgroundColor='var(--accent)'">
+                <span id="ft-btn-text">Send Inquiry</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              </button>
+
+              <div id="ft-success" class="hidden p-4 rounded-md text-sm" style="background-color: rgba(74,158,191,0.1); border: 1px solid var(--accent); color: var(--accent);">
+                ✓ Inquiry sent! We'll be in touch shortly.
+              </div>
+              <div id="ft-error" class="hidden p-4 rounded-md text-sm" style="background-color: rgba(192,74,26,0.1); border: 1px solid var(--highlight); color: var(--highlight);">
+                Something went wrong. Please email directly at <a href="mailto:bfox1981@gmail.com" class="underline">bfox1981@gmail.com</a>.
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel: Hire Blake -->
+    <div id="panel-blake" class="contact-panel hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-12">
+
+        <!-- Left: info -->
+        <div class="lg:col-span-2">
+          <p class="text-xs font-semibold uppercase tracking-widest mb-3" style="color: var(--highlight);">Career Opportunities</p>
+          <h1 class="text-3xl sm:text-4xl font-bold mb-4" style="color: var(--text-primary);">Hire Blake</h1>
+          <p class="text-base leading-relaxed mb-8" style="color: var(--text-secondary);">
+            Open to VP of Engineering, CTO, and Founding Partner conversations. Whether you're building something new, scaling an existing team, or navigating an AI transformation — reach out.
+          </p>
+
+          <div class="space-y-4">
+            <a href="mailto:bfox1981@gmail.com" class="flex items-center gap-3 text-sm font-medium transition-colors" style="color: var(--text-secondary);"
+              onmouseover="this.style.color='var(--highlight)'" onmouseout="this.style.color='var(--text-secondary)'">
+              <div class="w-9 h-9 rounded-md flex items-center justify-center" style="background-color: var(--bg-surface); border: 1px solid var(--border);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              bfox1981@gmail.com
+            </a>
+            <a href="https://www.linkedin.com/in/blake-fox/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-sm font-medium transition-colors" style="color: var(--text-secondary);"
+              onmouseover="this.style.color='var(--highlight)'" onmouseout="this.style.color='var(--text-secondary)'">
+              <div class="w-9 h-9 rounded-md flex items-center justify-center" style="background-color: var(--bg-surface); border: 1px solid var(--border);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 23.2 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              </div>
+              LinkedIn Profile
+            </a>
+            <a href="/resume/Fox_Blake_Resume_2026.pdf" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-sm font-medium transition-colors" style="color: var(--text-secondary);"
+              onmouseover="this.style.color='var(--highlight)'" onmouseout="this.style.color='var(--text-secondary)'">
+              <div class="w-9 h-9 rounded-md flex items-center justify-center" style="background-color: var(--bg-surface); border: 1px solid var(--border);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              </div>
+              Download Resume
+            </a>
+          </div>
+
+          <div class="mt-8 p-4 rounded-xl border" style="background-color: var(--bg-surface); border-color: var(--border);">
+            <p class="text-xs uppercase tracking-widest mb-1" style="color: var(--text-secondary);">Location</p>
+            <p class="text-sm font-medium" style="color: var(--text-primary);">Georgetown, TX (North Austin)</p>
+            <p class="text-xs mt-1" style="color: var(--text-secondary);">Available for remote, hybrid, and in-person roles</p>
+          </div>
+        </div>
+
+        <!-- Right: form -->
+        <div class="lg:col-span-3">
+          <div class="rounded-2xl border p-6 sm:p-8" style="background-color: var(--bg-surface); border-color: var(--border);">
+            <h2 class="text-lg font-semibold mb-6" style="color: var(--text-primary);">Blake Fox — Career Opportunity</h2>
+            <form id="form-blake" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="space-y-5" novalidate>
+              <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+              <input type="hidden" name="_subject" value="Blake Fox — Career Opportunity" />
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div>
+                  <label for="bl-name" class="block text-xs font-semibold uppercase tracking-widest mb-2" style="color: var(--text-secondary);">Name <span style="color: var(--highlight);">*</span></label>
+                  <input type="text" id="bl-name" name="name" required placeholder="Your name"
+                    class="w-full px-4 py-2.5 rounded-md border text-sm transition-colors duration-150 outline-none"
+                    style="background-color: var(--bg-primary); border-color: var(--border); color: var(--text-primary);"
+                    onfocus="this.style.borderColor='var(--highlight)'" onblur="this.style.borderColor='var(--border)'" />
+                </div>
+                <div>
+                  <label for="bl-email" class="block text-xs font-semibold uppercase tracking-widest mb-2" style="color: var(--text-secondary);">Email <span style="color: var(--highlight);">*</span></label>
+                  <input type="email" id="bl-email" name="email" required placeholder="your@email.com"
+                    class="w-full px-4 py-2.5 rounded-md border text-sm transition-colors duration-150 outline-none"
+                    style="background-color: var(--bg-primary); border-color: var(--border); color: var(--text-primary);"
+                    onfocus="this.style.borderColor='var(--highlight)'" onblur="this.style.borderColor='var(--border)'" />
+                </div>
+              </div>
+
+              <div>
+                <label for="bl-company" class="block text-xs font-semibold uppercase tracking-widest mb-2" style="color: var(--text-secondary);">Company / Organization</label>
+                <input type="text" id="bl-company" name="company" placeholder="Your company (optional)"
+                  class="w-full px-4 py-2.5 rounded-md border text-sm transition-colors duration-150 outline-none"
+                  style="background-color: var(--bg-primary); border-color: var(--border); color: var(--text-primary);"
+                  onfocus="this.style.borderColor='var(--highlight)'" onblur="this.style.borderColor='var(--border)'" />
+              </div>
+
+              <div>
+                <label for="bl-message" class="block text-xs font-semibold uppercase tracking-widest mb-2" style="color: var(--text-secondary);">Message <span style="color: var(--highlight);">*</span></label>
+                <textarea id="bl-message" name="message" required rows="5"
+                  placeholder="Tell me about the role, company, or opportunity…"
+                  class="w-full px-4 py-2.5 rounded-md border text-sm transition-colors duration-150 outline-none resize-vertical"
+                  style="background-color: var(--bg-primary); border-color: var(--border); color: var(--text-primary);"
+                  onfocus="this.style.borderColor='var(--highlight)'" onblur="this.style.borderColor='var(--border)'"></textarea>
+              </div>
+
+              <button type="submit" id="bl-submit"
+                class="inline-flex items-center gap-2 px-6 py-3 rounded-md font-semibold text-white text-sm transition-colors duration-150"
+                style="background-color: var(--highlight);"
+                onmouseover="this.style.backgroundColor='var(--highlight-hover)'"
+                onmouseout="this.style.backgroundColor='var(--highlight)'">
+                <span id="bl-btn-text">Send Message</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              </button>
+
+              <div id="bl-success" class="hidden p-4 rounded-md text-sm" style="background-color: rgba(74,158,191,0.1); border: 1px solid var(--accent); color: var(--accent);">
+                ✓ Message sent! I'll get back to you soon.
+              </div>
+              <div id="bl-error" class="hidden p-4 rounded-md text-sm" style="background-color: rgba(192,74,26,0.1); border: 1px solid var(--highlight); color: var(--highlight);">
+                Something went wrong. Please email directly at <a href="mailto:bfox1981@gmail.com" class="underline">bfox1981@gmail.com</a>.
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</BaseLayout>
+
+<script is:inline>
+  // Tab switching
+  var tabs = document.querySelectorAll('.contact-tab');
+  var panels = document.querySelectorAll('.contact-panel');
+
+  function activateTab(tabEl) {
+    var target = tabEl.dataset.target;
+    tabs.forEach(function(t) {
+      var isActive = t === tabEl;
+      var isFoxteck = t.id === 'tab-foxteck';
+      if (isActive) {
+        t.style.cssText = isFoxteck
+          ? 'background-color: var(--accent); color: #fff; border-color: var(--accent);'
+          : 'background-color: var(--highlight); color: #fff; border-color: var(--highlight);';
+      } else {
+        t.style.cssText = 'background: transparent; color: var(--text-secondary); border-color: var(--border);';
+      }
+    });
+    panels.forEach(function(p) {
+      p.classList.toggle('hidden', p.id !== target);
+    });
+  }
+
+  tabs.forEach(function(tab) {
+    tab.addEventListener('click', function() { activateTab(tab); });
+  });
+
+  // Auto-select tab from URL param
+  var params = new URLSearchParams(window.location.search);
+  if (params.get('type') === 'foxteck') {
+    activateTab(document.getElementById('tab-foxteck'));
+  } else if (params.get('type') === 'blake') {
+    activateTab(document.getElementById('tab-blake'));
+  }
+
+  // Form submission handlers
+  function wireForm(formId, btnId, btnTextId, successId, errorId) {
+    var form = document.getElementById(formId);
+    var btn = document.getElementById(btnId);
+    var btnText = document.getElementById(btnTextId);
+    var success = document.getElementById(successId);
+    var error = document.getElementById(errorId);
+
+    if (!form) return;
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+      btnText.textContent = 'Sending…';
+      btn.disabled = true;
+      try {
+        var res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' },
+        });
+        if (res.ok) {
+          form.reset();
+          success.classList.remove('hidden');
+          error.classList.add('hidden');
+          btn.style.display = 'none';
+        } else {
+          throw new Error('Server error');
+        }
+      } catch (err) {
+        error.classList.remove('hidden');
+        success.classList.add('hidden');
+        btnText.textContent = form.id === 'form-foxteck' ? 'Send Inquiry' : 'Send Message';
+        btn.disabled = false;
+      }
+    });
+  }
+
+  wireForm('form-foxteck', 'ft-submit', 'ft-btn-text', 'ft-success', 'ft-error');
+  wireForm('form-blake',   'bl-submit', 'bl-btn-text', 'bl-success', 'bl-error');
+</script>

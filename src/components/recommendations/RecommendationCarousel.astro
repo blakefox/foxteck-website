@@ -1,0 +1,66 @@
+---
+const recs = [
+  { src: '/assets/recommendations/rec-adrian.png',  name: 'Adrian' },
+  { src: '/assets/recommendations/rec-al.png',      name: 'Al' },
+  { src: '/assets/recommendations/rec-dave.png',    name: 'Dave' },
+  { src: '/assets/recommendations/rec-issac.png',   name: 'Issac' },
+  { src: '/assets/recommendations/rec-john.png',    name: 'John' },
+  { src: '/assets/recommendations/rec-kkayam.png',  name: 'Kkayam' },
+  { src: '/assets/recommendations/rec-russell.png', name: 'Russell' },
+  { src: '/assets/recommendations/rec-tim.png',     name: 'Tim' },
+];
+---
+
+<div class="relative">
+  <!-- Scroll container -->
+  <div
+    id="rec-scroll"
+    class="flex gap-4 overflow-x-auto pb-3 snap-x snap-mandatory scroll-smooth"
+    style="scrollbar-width: thin; scrollbar-color: var(--border) transparent;"
+  >
+    {recs.map((rec) => (
+      <div
+        class="shrink-0 snap-start rounded-xl overflow-hidden border"
+        style="width: clamp(280px, 70vw, 400px); border-color: var(--border); background-color: var(--bg-surface);"
+      >
+        <img
+          src={rec.src}
+          alt={`LinkedIn recommendation from ${rec.name}`}
+          class="w-full h-auto"
+          loading="lazy"
+        />
+      </div>
+    ))}
+  </div>
+
+  <!-- Prev/Next buttons -->
+  <div class="flex justify-end gap-2 mt-3">
+    <button
+      id="rec-prev"
+      aria-label="Previous recommendation"
+      class="p-2 rounded-md border transition-colors"
+      style="border-color: var(--border); color: var(--text-secondary); background: var(--bg-surface);"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button
+      id="rec-next"
+      aria-label="Next recommendation"
+      class="p-2 rounded-md border transition-colors"
+      style="border-color: var(--border); color: var(--text-secondary); background: var(--bg-surface);"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+</div>
+
+<script is:inline>
+  var scroll = document.getElementById('rec-scroll');
+  var prev   = document.getElementById('rec-prev');
+  var next   = document.getElementById('rec-next');
+  if (scroll && prev && next) {
+    var step = 420;
+    prev.addEventListener('click', function() { scroll.scrollBy({ left: -step, behavior: 'smooth' }); });
+    next.addEventListener('click', function() { scroll.scrollBy({ left:  step, behavior: 'smooth' }); });
+  }
+</script>

@@ -1,0 +1,142 @@
+---
+---
+
+<form
+  id="contact-form"
+  action="https://formspree.io/f/YOUR_FORM_ID"
+  method="POST"
+  class="space-y-5"
+  novalidate
+>
+  <!-- Honeypot spam prevention -->
+  <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+  <input type="hidden" name="_subject" value="Foxteck.com — New Contact" />
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+    <div>
+      <label for="name" class="block text-xs font-semibold uppercase tracking-widest mb-2" style="color: var(--text-secondary);">
+        Name <span style="color: var(--highlight);">*</span>
+      </label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        required
+        placeholder="Your name"
+        class="w-full px-4 py-2.5 rounded-md border text-sm transition-colors duration-150 outline-none"
+        style="background-color: var(--bg-primary); border-color: var(--border); color: var(--text-primary);"
+        onfocus="this.style.borderColor='var(--accent)'"
+        onblur="this.style.borderColor='var(--border)'"
+      />
+    </div>
+    <div>
+      <label for="email" class="block text-xs font-semibold uppercase tracking-widest mb-2" style="color: var(--text-secondary);">
+        Email <span style="color: var(--highlight);">*</span>
+      </label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        required
+        placeholder="your@email.com"
+        class="w-full px-4 py-2.5 rounded-md border text-sm transition-colors duration-150 outline-none"
+        style="background-color: var(--bg-primary); border-color: var(--border); color: var(--text-primary);"
+        onfocus="this.style.borderColor='var(--accent)'"
+        onblur="this.style.borderColor='var(--border)'"
+      />
+    </div>
+  </div>
+
+  <div>
+    <label for="company" class="block text-xs font-semibold uppercase tracking-widest mb-2" style="color: var(--text-secondary);">
+      Company / Organization
+    </label>
+    <input
+      type="text"
+      id="company"
+      name="company"
+      placeholder="Your company (optional)"
+      class="w-full px-4 py-2.5 rounded-md border text-sm transition-colors duration-150 outline-none"
+      style="background-color: var(--bg-primary); border-color: var(--border); color: var(--text-primary);"
+      onfocus="this.style.borderColor='var(--accent)'"
+      onblur="this.style.borderColor='var(--border)'"
+    />
+  </div>
+
+  <div>
+    <label for="message" class="block text-xs font-semibold uppercase tracking-widest mb-2" style="color: var(--text-secondary);">
+      Message <span style="color: var(--highlight);">*</span>
+    </label>
+    <textarea
+      id="message"
+      name="message"
+      required
+      rows="5"
+      placeholder="Tell me about the role, project, or opportunity..."
+      class="w-full px-4 py-2.5 rounded-md border text-sm transition-colors duration-150 outline-none resize-vertical"
+      style="background-color: var(--bg-primary); border-color: var(--border); color: var(--text-primary);"
+      onfocus="this.style.borderColor='var(--accent)'"
+      onblur="this.style.borderColor='var(--border)'"
+    ></textarea>
+  </div>
+
+  <!-- Submit -->
+  <button
+    type="submit"
+    id="submit-btn"
+    class="inline-flex items-center gap-2 px-6 py-3 rounded-md font-semibold text-white text-sm transition-colors duration-150"
+    style="background-color: var(--highlight);"
+    onmouseover="this.style.backgroundColor='var(--highlight-hover)'"
+    onmouseout="this.style.backgroundColor='var(--highlight)'"
+  >
+    <span id="btn-text">Send Message</span>
+    <svg id="btn-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+  </button>
+
+  <!-- Status messages -->
+  <div id="form-success" class="hidden p-4 rounded-md text-sm" style="background-color: rgba(74,158,191,0.1); border: 1px solid var(--accent); color: var(--accent);">
+    ✓ Message sent! I'll get back to you soon.
+  </div>
+  <div id="form-error" class="hidden p-4 rounded-md text-sm" style="background-color: rgba(192,74,26,0.1); border: 1px solid var(--highlight); color: var(--highlight);">
+    Something went wrong. Please try emailing me directly at <a href="mailto:bfox1981@gmail.com" class="underline">bfox1981@gmail.com</a>.
+  </div>
+</form>
+
+<script is:inline>
+  var form    = document.getElementById('contact-form');
+  var btnText = document.getElementById('btn-text');
+  var success = document.getElementById('form-success');
+  var error   = document.getElementById('form-error');
+  var btn     = document.getElementById('submit-btn');
+
+  if (form) {
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+
+      btnText.textContent = 'Sending…';
+      btn.disabled = true;
+
+      try {
+        var res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' },
+        });
+        if (res.ok) {
+          form.reset();
+          success.classList.remove('hidden');
+          error.classList.add('hidden');
+          btn.style.display = 'none';
+        } else {
+          throw new Error('Server error');
+        }
+      } catch (err) {
+        error.classList.remove('hidden');
+        success.classList.add('hidden');
+        btnText.textContent = 'Send Message';
+        btn.disabled = false;
+      }
+    });
+  }
+</script>

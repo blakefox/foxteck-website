@@ -1,0 +1,164 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import RecommendationCarousel from '../components/recommendations/RecommendationCarousel.astro';
+
+const skills = {
+  'Languages':     ['C', 'C++', 'C#', 'Python', 'JavaScript', 'TypeScript', 'PHP', 'PL/SQL', 'LUA', 'HTML/CSS'],
+  'AI & ML':       ['Claude API', 'Agentic Workflows', 'LLM Integration', 'OpenCV', 'TensorFlow', 'GitHub Copilot'],
+  'Frontend':      ['React', 'Angular', 'Three.js', 'WebGL', 'D3.js'],
+  'Backend':       ['Node.js', '.NET', 'REST APIs', 'WebSockets', 'CouchDB', 'Azure'],
+  'Game Engines':  ['Unity', 'Unreal Engine'],
+  'DevOps':        ['CI/CD', 'DevOps Pipelines', 'Azure Static Web Apps', 'GitHub Actions'],
+  'Hardware':      ['VR / AR / MR', 'Firmware', 'Hardware R&D', 'Manufacturing'],
+  'Leadership':    ['CTO', 'VP Engineering', 'Team Building', 'Public Speaking', 'Fractional CTO'],
+};
+---
+
+<BaseLayout
+  title="About — Blake Fox"
+  description="Blake Fox — VP of Engineering, CTO, and AI Specialist with 15+ years building AI-powered hardware and software products at venture-backed startups."
+>
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 py-12">
+
+    <!-- Header -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-14">
+      <div class="lg:col-span-2">
+        <p class="text-xs font-semibold uppercase tracking-widest mb-3" style="color: var(--highlight);">About</p>
+        <h1 class="text-3xl sm:text-4xl font-bold mb-6" style="color: var(--text-primary);">Blake Fox</h1>
+
+        <div class="space-y-4 text-base leading-relaxed" style="color: var(--text-secondary);">
+          <p>
+            I've spent my career at the edge of what AI can do for people. From building cognitive systems with IBM Watson,
+            to driving real-time facial tracking and extreme character animation with Faceware, to developing AI that
+            extends a doctor's ability to diagnose and treat at HIA Medical — I've never been interested in AI as a novelty.
+            I'm interested in AI that changes what's possible for the person using it.
+          </p>
+          <p>
+            That conviction runs through everything I build today. At IKIN, that means reimagining content creation
+            entirely — generative AI for holographic display, higher-fidelity video, and AI-driven advertising that
+            doesn't just target an audience, it understands them: their context, their moment, their intent.
+          </p>
+          <p>
+            And in how I lead engineering teams, it means embracing AI-assisted coding and tooling not as a shortcut,
+            but as a force multiplier — shipping faster, thinking bigger, and raising the floor for what a small team
+            can accomplish.
+          </p>
+          <p class="font-medium" style="color: var(--text-primary);">
+            The thread across all of it: I build AI that earns trust by being genuinely useful.
+          </p>
+        </div>
+
+        <!-- CTA row -->
+        <div class="flex flex-wrap gap-3 mt-8">
+          <a
+            href="/resume/Fox_Blake_Resume_2026.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-5 py-2.5 rounded-md font-semibold text-white text-sm transition-colors duration-150"
+            style="background-color: var(--highlight);"
+            onmouseover="this.style.backgroundColor='var(--highlight-hover)'"
+            onmouseout="this.style.backgroundColor='var(--highlight)'"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download Resume
+          </a>
+          <a
+            href="https://www.linkedin.com/in/blake-fox/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-5 py-2.5 rounded-md font-semibold text-sm border transition-colors duration-150"
+            style="border-color: var(--accent); color: var(--accent); background: transparent;"
+          >
+            LinkedIn Profile
+          </a>
+          <a
+            href="https://www.youtube.com/watch?v=LN-fbYzCQRk"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-5 py-2.5 rounded-md font-semibold text-sm border transition-colors duration-150"
+            style="border-color: var(--border); color: var(--text-secondary); background: transparent;"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+            ITEXPO 2025 Talk
+          </a>
+        </div>
+      </div>
+
+      <!-- Headshot -->
+      <div class="flex justify-center lg:justify-end">
+        <div class="relative">
+          <div
+            class="w-52 h-52 rounded-2xl overflow-hidden border-2"
+            style="border-color: var(--highlight);"
+          >
+            <img
+              src="/assets/personal/blake-fox-headshot.png"
+              alt="Blake Fox"
+              class="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skills -->
+    <section class="mb-14">
+      <h2 class="text-xl font-bold mb-6" style="color: var(--text-primary);">Technical Skills</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {Object.entries(skills).map(([category, items]) => (
+          <div class="rounded-xl border p-4" style="background-color: var(--bg-surface); border-color: var(--border);">
+            <p class="text-xs font-semibold uppercase tracking-widest mb-3" style="color: var(--highlight);">{category}</p>
+            <div class="flex flex-wrap gap-1.5">
+              {items.map((skill) => (
+                <span
+                  class="text-xs px-2 py-0.5 rounded"
+                  style="background-color: var(--accent-subtle); color: var(--accent);"
+                >
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section class="mb-14">
+      <h2 class="text-xl font-bold mb-6" style="color: var(--text-primary);">Education</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="rounded-xl border p-5" style="background-color: var(--bg-surface); border-color: var(--border);">
+          <p class="text-sm font-semibold" style="color: var(--text-primary);">California State University, Fresno</p>
+          <p class="text-xs mt-1" style="color: var(--accent);">B.S. Computer Science — UI & Design Engineering</p>
+          <p class="text-xs mt-1" style="color: var(--text-secondary);">Fresno, CA</p>
+        </div>
+        <div class="rounded-xl border p-5" style="background-color: var(--bg-surface); border-color: var(--border);">
+          <p class="text-sm font-semibold" style="color: var(--text-primary);">The Art Institute, San Diego</p>
+          <p class="text-xs mt-1" style="color: var(--accent);">Visual Game Programming & Design</p>
+          <p class="text-xs mt-1" style="color: var(--text-secondary);">San Diego, CA</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recommendations -->
+    <section>
+      <div class="flex items-end justify-between mb-6 gap-4">
+        <div>
+          <h2 class="text-xl font-bold" style="color: var(--text-primary);">LinkedIn Recommendations</h2>
+          <p class="text-sm mt-1" style="color: var(--text-secondary);">What colleagues and clients say</p>
+        </div>
+        <a
+          href="https://www.linkedin.com/in/blake-fox/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-xs font-medium shrink-0"
+          style="color: var(--accent);"
+        >
+          View on LinkedIn →
+        </a>
+      </div>
+      <RecommendationCarousel />
+    </section>
+
+  </div>
+</BaseLayout>

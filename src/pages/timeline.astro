@@ -1,0 +1,73 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TimelineEntry from '../components/timeline/TimelineEntry.astro';
+import { timeline } from '../data/timeline';
+
+const allProjects = await getCollection('projects');
+---
+
+<BaseLayout
+  title="Career Timeline — Blake Fox"
+  description="The career arc of Blake Fox — from FA-18 avionics to IBM Watson AI, Faceware, HIA, IKIN, and founding Foxteck."
+>
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 py-12">
+
+    <!-- Header -->
+    <div class="text-center mb-14">
+      <p class="text-xs font-semibold uppercase tracking-widest mb-3" style="color: var(--highlight);">Career Arc</p>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4" style="color: var(--text-primary);">Timeline</h1>
+      <p class="text-base max-w-xl mx-auto" style="color: var(--text-secondary);">
+        From US Navy FA-18 avionics to building AI-powered products at the frontier of what's possible.
+        25 years of engineering, leadership, and shipping.
+      </p>
+    </div>
+
+    <!-- Timeline -->
+    <div class="relative">
+      <!-- Vertical center line (desktop) -->
+      <div
+        class="hidden md:block absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2"
+        style="background-color: var(--border);"
+      ></div>
+
+      <!-- Mobile left line -->
+      <div
+        class="md:hidden absolute left-1.5 top-0 bottom-0 w-px"
+        style="background-color: var(--border);"
+      ></div>
+
+      <div class="flex flex-col gap-8 md:gap-10 pl-8 md:pl-0">
+        {timeline.map((stop, i) => (
+          <TimelineEntry stop={stop} projects={allProjects} index={i} />
+        ))}
+      </div>
+    </div>
+
+    <!-- Bottom CTA -->
+    <div class="mt-16 text-center">
+      <p class="text-sm mb-4" style="color: var(--text-secondary);">Want the full picture?</p>
+      <div class="flex flex-wrap justify-center gap-3">
+        <a
+          href="/resume/Fox_Blake_Resume_2026.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-md font-semibold text-white text-sm transition-colors duration-150"
+          style="background-color: var(--highlight);"
+          onmouseover="this.style.backgroundColor='var(--highlight-hover)'"
+          onmouseout="this.style.backgroundColor='var(--highlight)'"
+        >
+          Download Resume
+        </a>
+        <a
+          href="/contact"
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-md font-semibold text-sm border transition-colors duration-150"
+          style="border-color: var(--accent); color: var(--accent); background: transparent;"
+        >
+          Let's Talk
+        </a>
+      </div>
+    </div>
+
+  </div>
+</BaseLayout>
