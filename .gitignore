@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.astro/
+.env
+*.local
+
+# Source material — not part of the Astro build
+/Content/
+
+# Oversized video files (>100MB) — host on Azure Blob Storage / CDN
+public/assets/projects/ikin-scanningtech/render.mp4
+public/assets/projects/ikin-asimov/adtech-clip1.mp4
+public/assets/projects/ikin-asimov/adtech-clip2.mp4
+public/assets/projects/ikin-ryz-arc/ryz-unfold.mov
