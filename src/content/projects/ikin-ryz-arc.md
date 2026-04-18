@@ -19,7 +19,7 @@ videos:
   - "/assets/projects/ikin-ryz-arc/ryz-demoreel.mp4"
   - "/assets/projects/ikin-ryz-arc/arc-anime.mov"
   - "/assets/projects/ikin-ryz-arc/arc-hummingbird.mov"
-  - "/assets/projects/ikin-ryz-arc/ryz-unfold.mov"
+  - "/assets/projects/ikin-ryz-arc/Ryz-Unfold.mp4"
 externalUrl: "https://ikininc.com/products/ryz/"
 featured: true
 ---
