@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import ProjectCard from '../projects/ProjectCard.astro';
+
+const allProjects = await getCollection('projects');
+const featured = allProjects
+  .filter((p) => p.data.featured)
+  .sort((a, b) => b.data.order - a.data.order)
+  .slice(0, 4);
+---
+
+<section class="py-16">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <div class="flex items-end justify-between mb-8 gap-4">
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-widest mb-2" style="color: var(--highlight);">Selected Work</p>
+        <h2 class="text-2xl sm:text-3xl font-bold" style="color: var(--text-primary);">Featured Projects</h2>
+      </div>
+      <a
+        href="/projects"
+        class="text-sm font-medium flex items-center gap-1.5 shrink-0 transition-colors"
+        style="color: var(--accent);"
+      >
+        View All Work
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
+      {featured.map((project) => (
+        <ProjectCard project={project} />
+      ))}
+    </div>
+  </div>
+</section>

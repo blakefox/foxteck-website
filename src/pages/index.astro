@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/home/HeroSection.astro';
+import StatBar from '../components/home/StatBar.astro';
+import FeaturedProjects from '../components/home/FeaturedProjects.astro';
+import CompanySection from '../components/home/CompanySection.astro';
+---
+
+<BaseLayout title="Blake Fox — VP of Engineering · CTO · AI Specialist">
+  <HeroSection />
+  <StatBar />
+  <FeaturedProjects />
+  <CompanySection />
+
+  <!-- AI Philosophy callout -->
+  <section class="py-16 border-t" style="border-color: var(--border);">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center">
+      <p class="text-xs font-semibold uppercase tracking-widest mb-4" style="color: var(--highlight);">Philosophy</p>
+      <blockquote class="text-xl sm:text-2xl font-medium leading-relaxed italic" style="color: var(--text-primary);">
+        "I build AI that earns trust by being genuinely useful."
+      </blockquote>
+      <p class="mt-6 text-base leading-relaxed" style="color: var(--text-secondary);">
+        At IKIN, that means reimagining content creation entirely — generative AI for holographic display,
+        higher-fidelity video, and AI-driven advertising that doesn't just target an audience, it understands them.
+        In how I lead engineering teams, it means embracing AI-assisted development as a force multiplier —
+        shipping faster, thinking bigger, and raising the floor for what a small team can accomplish.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3 justify-center">
+        <a
+          href="/about"
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-md font-semibold text-sm border transition-colors duration-150"
+          style="border-color: var(--accent); color: var(--accent); background: transparent;"
+        >
+          Read Full Story
+        </a>
+        <a
+          href="/timeline"
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-md font-semibold text-sm border transition-colors duration-150"
+          style="border-color: var(--border); color: var(--text-secondary); background: transparent;"
+        >
+          Career Timeline
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA strip -->
+  <section class="py-14" style="background-color: var(--bg-secondary);">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-3" style="color: var(--text-primary);">
+        Ready to work together?
+      </h2>
+      <p class="text-base mb-8" style="color: var(--text-secondary);">
+        Engage Foxteck for consulting and product work, or reach out to hire Blake for VP / CTO roles.
+      </p>
+      <div class="flex flex-wrap gap-3 justify-center">
+        <a
+          href="/contact?type=foxteck"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-md font-semibold text-white text-sm transition-colors duration-150"
+          style="background-color: var(--highlight);"
+          onmouseover="this.style.backgroundColor='var(--highlight-hover)'"
+          onmouseout="this.style.backgroundColor='var(--highlight)'"
+        >
+          Work with Foxteck
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a
+          href="/contact?type=blake"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-md font-semibold text-sm border transition-colors duration-150"
+          style="border-color: var(--accent); color: var(--accent); background: transparent;"
+          onmouseover="this.style.background='var(--accent-subtle)'"
+          onmouseout="this.style.background='transparent'"
+        >
+          Hire Blake
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
