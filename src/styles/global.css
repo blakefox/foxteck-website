@@ -1,0 +1,116 @@
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/inter/700.css';
+@import '@fontsource/jetbrains-mono/400.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Brand Colors (logo-extracted, always available) ───── */
+:root {
+  --brand-shadow:    #1A0805;
+  --brand-brown:     #4A1C08;
+  --brand-rust:      #C04A1A;
+  --brand-amber:     #E8620A;
+  --brand-cream:     #F0E0CC;
+}
+
+/* ── Dark Mode (default) ────────────────────────────────── */
+:root,
+[data-theme="dark"] {
+  --bg-primary:      #0D1117;
+  --bg-secondary:    #161B22;
+  --bg-surface:      #21262D;
+  --border:          #30363D;
+  --text-primary:    #E6EDF3;
+  --text-secondary:  #8B949E;
+  --accent:          #4A9EBF;
+  --accent-hover:    #6AB8D4;
+  --accent-subtle:   #0F2830;
+  --highlight:       #C04A1A;
+  --highlight-hover: #E8620A;
+}
+
+/* ── Light Mode ─────────────────────────────────────────── */
+[data-theme="light"] {
+  --bg-primary:      #F5F0EC;
+  --bg-secondary:    #FFFFFF;
+  --bg-surface:      #EDE8E3;
+  --border:          #CCC5BC;
+  --text-primary:    #1A0D07;
+  --text-secondary:  #6B5C50;
+  --accent:          #1A6B8A;
+  --accent-hover:    #145A75;
+  --accent-subtle:   #D8EDF5;
+  --highlight:       #B8461A;
+  --highlight-hover: #CC5A20;
+}
+
+/* ── Base Styles ────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  line-height: 1.6;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+/* ── Utility Classes ───────────────────────────────────── */
+.text-primary    { color: var(--text-primary); }
+.text-secondary  { color: var(--text-secondary); }
+.bg-primary      { background-color: var(--bg-primary); }
+.bg-secondary    { background-color: var(--bg-secondary); }
+.bg-surface      { background-color: var(--bg-surface); }
+.border-base     { border-color: var(--border); }
+.text-accent     { color: var(--accent); }
+.text-highlight  { color: var(--highlight); }
+
+/* ── Scrollbar ──────────────────────────────────────────── */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-secondary); }
+
+/* ── Focus Styles ───────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* ── Company Section Visual Distinction ────────────────── */
+[data-section="company"] .section-label { color: var(--accent); }
+[data-section="company"] .section-accent { border-color: var(--accent); }
+
+/* ── Video / Media ──────────────────────────────────────── */
+video {
+  max-width: 100%;
+  display: block;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
