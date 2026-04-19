@@ -28,6 +28,13 @@ const companyLabels: Record<string, string> = {
   'us-navy':     'US Navy',
 };
 const badgeLabel = companyLabels[companySlug] ?? company.split(' ')[0];
+
+const companyLogoExt: Record<string, string> = {
+  faceware: 'jpg',
+  hia: 'jpg',
+};
+const logoExt = companyLogoExt[companySlug] ?? 'png';
+const companyLogo = `/assets/companies/${companySlug}.${logoExt}`;
 ---
 
 <article
@@ -39,6 +46,9 @@ const badgeLabel = companyLabels[companySlug] ?? company.split(' ')[0];
 >
   <!-- Media preview -->
   <a href={`/projects/${project.slug}`} class="block relative aspect-video overflow-hidden bg-black">
+    <div class="absolute top-2 right-2 z-10 w-16 h-16 rounded-md overflow-hidden flex items-center justify-center" style="background:rgba(0,0,0,0.45); backdrop-filter:blur(4px);">
+      <img src={companyLogo} alt={company} class="w-full h-full object-contain p-0.5" />
+    </div>
     {heroVideo ? (
       <video
         src={heroVideo}

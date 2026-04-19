@@ -12,6 +12,10 @@ summary: "Engineered the live facial capture SDK integration that brought real-t
 youtubeUrls:
   - "https://www.youtube.com/watch?v=ehHdGzkaPCg"
   - "https://www.youtube.com/shorts/YPY62mtssSc"
+heroImage: "/assets/projects/faceware-starcitizen/SC_Hero.png"
+images:
+  - "/assets/projects/faceware-starcitizen/Star_Citizen_faceware_motion_capture_camera.png"
+  - "/assets/projects/faceware-starcitizen/1037390-cloud-imperium-games-faceware-technologies-bring-real-time-graphics-star-citizen.png"
 externalUrl: "https://facewaretech.com/"
 featured: false
 ---

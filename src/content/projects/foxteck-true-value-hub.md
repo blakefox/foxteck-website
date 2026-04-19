@@ -9,6 +9,10 @@ order: 15
 tags: ["Claude / CoPilot AI", "MCP", "Jira", "Agentic AI", "Computer Vision", "DevOps", "Team Leadership", "AI Adoption"]
 domains: ["ai", "leadership", "web"]
 summary: "Serving as Fractional CTO — driving 2x developer velocity in 90 days through structured AI adoption, MCP server integration, agentic workflow design, and engineering pipeline hardening."
+heroImage: "/assets/projects/foxteck-true-value-hub/TVH_Hero.png"
+images:
+  - "/assets/projects/foxteck-true-value-hub/Howitworks1.png"
+  - "/assets/projects/foxteck-true-value-hub/Howitworks2.png"
 externalUrl: "https://www.truevaluehub.com/"
 featured: false
 ---

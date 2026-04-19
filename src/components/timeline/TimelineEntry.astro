@@ -14,6 +14,21 @@ const yearRange = `${stop.startYear} – ${stop.endYear === 'present' ? 'Present
 const linkedProjects = stop.projectSlugs
   .map((slug) => projects.find((p) => p.slug === slug))
   .filter(Boolean) as CollectionEntry<'projects'>[];
+
+const logoMap: Record<string, string> = {
+  navy:               '/assets/companies/us-navy.png',
+  madcatz:            '/assets/companies/madcatz.png',
+  ibm:                '/assets/companies/ibm.png',
+  faceware:           '/assets/companies/faceware.jpg',
+  livestalk:          '/assets/companies/foxteck.png',
+  hia:                '/assets/companies/hia.jpg',
+  ikin:               '/assets/companies/ikin.png',
+  'foxteck-consulting':   '/assets/companies/foxteck.png',
+  'sony-online':          '/assets/companies/sony-online.png',
+  'gamecloud':            '/assets/companies/gamecloud.png',
+  'grading-assistant':   '/assets/projects/foxteck-grading-assistant/logo.png',
+};
+const companyLogo = logoMap[stop.id];
 ---
 
 <!-- Mobile: always stacked; Desktop: alternating left/right -->
@@ -22,9 +37,15 @@ const linkedProjects = stop.projectSlugs
   <!-- Content card -->
   <div class={`flex-1 md:w-[calc(50%-2rem)] ${isRight ? 'md:pr-12' : 'md:pl-12'} ${!isRight ? 'md:text-right' : ''}`}>
     <div
-      class="rounded-xl border p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
+      class="relative rounded-xl border p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
       style="background-color: var(--bg-surface); border-color: var(--border);"
     >
+      {companyLogo && (
+        <div class={`absolute top-3 ${isRight ? 'right-3' : 'left-3'} w-[60px] h-[60px] rounded-md overflow-hidden flex items-center justify-center`} style="background:rgba(0,0,0,0.08);">
+          <img src={companyLogo} alt={stop.company} class="w-full h-full object-contain p-0.5" />
+        </div>
+      )}
+
       <!-- Year range -->
       <p class="text-xs font-mono mb-2" style="color: var(--highlight);">{yearRange}</p>
 

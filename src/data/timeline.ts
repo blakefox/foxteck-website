@@ -34,6 +34,29 @@ export const timeline: TimelineStop[] = [
     projectSlugs: ['madcatz-combat-pilot', 'madcatz-saitek'],
   },
   {
+    id: 'sony-online',
+    company: 'Sony Online Entertainment',
+    role: 'Contract Engineer',
+    startYear: 2012,
+    endYear: 2012,
+    location: 'Remote',
+    description:
+      'Short-term contract during the Chains of Eternity expansion launch for EverQuest II. Designed and implemented the adornment system XML export pipeline, enabling third-party fan sites to dynamically query in-game item data. Also contributed targeted bug fixes during the expansion\'s November 2012 release window.',
+    projectSlugs: ['sony-everquest2'],
+  },
+  {
+    id: 'gamecloud',
+    company: 'Gamecloud',
+    role: 'Senior Unity3D Engineer',
+    startYear: 2013,
+    endYear: 2014,
+    location: 'Remote',
+    description:
+      'Senior engineer on Project Gridiron, a cross-platform sports title that shipped in 2014. Owned core gameplay systems, AI-driven play selection, and responsive UI layouts across a wide device footprint. Conducted usability testing throughout development.',
+    projectSlugs: ['gamecloud-gridiron'],
+    highlight: 'Shipped 2014 · AI play selection · Cross-platform',
+  },
+  {
     id: 'ibm',
     company: 'IBM Watson / Watson Health',
     role: 'Engineer / Project Manager — Watson Immersive Technologies',
@@ -86,7 +109,7 @@ export const timeline: TimelineStop[] = [
     company: 'IKIN Technologies',
     role: 'VP of Engineering',
     startYear: 2022,
-    endYear: 'present',
+    endYear: 2026,
     location: 'Austin, TX',
     description:
       'Leading 15+ internal employees and 4 contract teams across hardware, software, AI, and content. Took the RYZ holographic device from alpha to manufacturing (20% BOM reduction), launched ASIMOV generative AI platform in sports entertainment, and led company-wide adoption of Claude Code and GitHub Copilot.',
@@ -104,5 +127,17 @@ export const timeline: TimelineStop[] = [
       'Independent consulting practice delivering AI-powered products and guiding engineering teams through structured AI adoption. Architected The Grading Assistant — a full-stack Claude-powered agentic application — and engaged as Fractional CTO at True Value Hub, achieving 2x developer velocity in 90 days.',
     projectSlugs: ['foxteck-grading-assistant', 'foxteck-true-value-hub'],
     highlight: '2x velocity in 90 days · Claude-powered products',
+  },
+  {
+    id: 'grading-assistant',
+    company: 'The Grading Assistant / Foxteck',
+    role: 'Founder / Lead Engineer',
+    startYear: 2026,
+    endYear: 'present',
+    location: 'Georgetown, TX',
+    description:
+      'Built The Grading Assistant — a full-stack agentic AI application powered by Claude, designed to automate grading workflows for educators. Leverages OCR, agentic reasoning, and deep Google Classroom integration to dramatically reduce the time teachers spend on assessment.',
+    projectSlugs: ['foxteck-grading-assistant'],
+    highlight: 'Claude-powered agentic grading · Google Classroom integration',
   },
 ];

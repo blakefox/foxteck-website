@@ -8,6 +8,8 @@ endYear: 2012
 order: 17
 tags: ["C++", "MMO", "XML", "API Design", "Game Systems", "Community Tools"]
 domains: ["games"]
+heroImage: "/assets/projects/sonyonline-everquest2/eq2_hero.jpg"
+externalUrl: "https://eq2.fandom.com/wiki/Category:Chains_of_Eternity"
 summary: "Contract engineer on the Chains of Eternity expansion — built the adornment system XML export pipeline powering third-party fan sites, and contributed bug fixes during the expansion's November 2012 launch window."
 featured: false
 ---
