@@ -5,10 +5,11 @@ companySlug: "ikin"
 role: "VP of Engineering"
 startYear: 2022
 endYear: 2023
-order: 11
+order: 12
 tags: ["3D Scanning", "Computer Vision", "Beauty Tech", "Volumetric Capture", "Enterprise"]
 domains: ["ai", "hardware", "medical"]
 summary: "Led a 3D scanning technology engagement with Estée Lauder, delivering volumetric capture capabilities for beauty tech applications."
+heroImage: "/assets/projects/ikin-scanningtech/EL_HeroShot.png"
 heroVideo: "/assets/projects/ikin-scanningtech/render.mp4"
 videos:
   - "/assets/projects/ikin-scanningtech/render.mp4"

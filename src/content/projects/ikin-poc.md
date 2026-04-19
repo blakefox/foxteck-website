@@ -5,7 +5,7 @@ companySlug: "ikin"
 role: "VP of Engineering"
 startYear: 2022
 endYear: "present"
-order: 12
+order: 13
 tags: ["Unity", "3D Rendering", "Holographic", "R&D", "Computer Vision"]
 domains: ["hardware", "games", "ai"]
 summary: "R&D proof-of-concept demos showcasing IKIN's holographic display capabilities — from interactive 3D objects to character animation — used to validate the platform and attract partners."

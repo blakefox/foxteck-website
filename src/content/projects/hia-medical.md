@@ -9,6 +9,7 @@ order: 8
 tags: ["Three.js", "Angular", "WebMD", "HIPAA", "SOC2", "Metahumans", "Telehealth", "AWS"]
 domains: ["ai", "web", "medical", "leadership"]
 summary: "Abandoned Unity, rebuilt the entire platform on the web, grew adoption 6x — and landed a partnership with WebMD by eliminating friction and achieving full HIPAA/SOC2 compliance."
+heroImage: "/assets/projects/hia-medical/HIA_Hero.png"
 youtubeUrls:
   - "https://www.youtube.com/watch?v=6Fw8OY14gdM"
   - "https://www.youtube.com/watch?v=a5itu4neY5Y"

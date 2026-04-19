@@ -5,6 +5,8 @@ import ProjectCard from '../../components/projects/ProjectCard.astro';
 
 const allProjects = await getCollection('projects');
 const projects = allProjects.sort((a, b) => b.data.order - a.data.order);
+const projectCount = allProjects.length;
+const companyCount = new Set(allProjects.map((p) => p.data.companySlug)).size;
 
 const domains = ['all', 'ai', 'hardware', 'games', 'web', 'medical', 'leadership', 'firmware', 'startup'];
 
@@ -41,14 +43,21 @@ const techTags = [
   { label: 'HIPAA',           group: 'cloud' },
 ];
 
+const companyLabelMap: Record<string, string> = {
+  ikin:        'IKIN',
+  faceware:    'Faceware',
+  ibm:         'IBM',
+  madcatz:     'Madcatz',
+  foxteck:     'Foxteck',
+  hia:         'HIA',
+  gamecloud:   'Gamecloud',
+  'sony-online': 'Sony Online',
+  'us-navy':   'US Navy',
+};
+const companySlugs = [...new Set(allProjects.map((p) => p.data.companySlug))];
 const companies = [
-  { slug: 'all',     label: 'All Companies' },
-  { slug: 'ikin',    label: 'IKIN' },
-  { slug: 'faceware',label: 'Faceware' },
-  { slug: 'ibm',     label: 'IBM' },
-  { slug: 'madcatz', label: 'Madcatz' },
-  { slug: 'foxteck', label: 'Foxteck' },
-  { slug: 'hia',     label: 'HIA' },
+  { slug: 'all', label: 'All Companies' },
+  ...companySlugs.map((slug) => ({ slug, label: companyLabelMap[slug] ?? slug })),
 ];
 ---
 
@@ -63,7 +72,7 @@ const companies = [
       <p class="text-xs font-semibold uppercase tracking-widest mb-2" style="color: var(--highlight);">Portfolio</p>
       <h1 class="text-3xl sm:text-4xl font-bold mb-3" style="color: var(--text-primary);">Work</h1>
       <p class="text-base max-w-xl" style="color: var(--text-secondary);">
-        14 projects across 9 companies — AI platforms, hardware startups, enterprise systems, games, and medical technology.
+        {projectCount} projects across {companyCount} companies — AI platforms, hardware startups, enterprise systems, games, and medical technology.
       </p>
     </div>
 

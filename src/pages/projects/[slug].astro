@@ -168,3 +168,38 @@ const next = idx < sorted.length - 1 ? sorted[idx + 1] : null;
 
   </div>
 </BaseLayout>
+
+<!-- Lightbox -->
+<div id="lightbox" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.85); align-items:center; justify-content:center; cursor:zoom-out;">
+  <img id="lightbox-img" src="" alt="" style="max-width:90vw; max-height:90vh; border-radius:0.5rem; box-shadow:0 0 60px rgba(0,0,0,0.8);" />
+</div>
+
+<style>
+  .prose-lightbox {
+    cursor: zoom-in;
+    border-radius: 0.5rem;
+    transition: opacity 0.15s;
+  }
+  .prose-lightbox:hover { opacity: 0.85; }
+  .inline-figure figcaption {
+    text-align: center;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    color: var(--text-secondary);
+    font-style: italic;
+  }
+</style>
+
+<script>
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightbox-img');
+  document.querySelectorAll('.prose-lightbox').forEach((img) => {
+    img.addEventListener('click', () => {
+      lbImg.src = img.src;
+      lbImg.alt = img.alt;
+      lb.style.display = 'flex';
+    });
+  });
+  lb.addEventListener('click', () => { lb.style.display = 'none'; });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') lb.style.display = 'none'; });
+</script>

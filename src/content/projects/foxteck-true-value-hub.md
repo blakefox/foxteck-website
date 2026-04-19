@@ -5,8 +5,8 @@ companySlug: "foxteck"
 role: "Fractional CTO"
 startYear: 2025
 endYear: "present"
-order: 14
-tags: ["Claude AI", "MCP", "Jira", "Agentic AI", "Computer Vision", "DevOps", "Team Leadership", "AI Adoption"]
+order: 15
+tags: ["Claude / CoPilot AI", "MCP", "Jira", "Agentic AI", "Computer Vision", "DevOps", "Team Leadership", "AI Adoption"]
 domains: ["ai", "leadership", "web"]
 summary: "Serving as Fractional CTO — driving 2x developer velocity in 90 days through structured AI adoption, MCP server integration, agentic workflow design, and engineering pipeline hardening."
 externalUrl: "https://www.truevaluehub.com/"

@@ -15,8 +15,12 @@ const hasMedia = (images?.length ?? 0) > 0 || (videos?.length ?? 0) > 0;
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
       {images?.map((src) => (
-        <div class="rounded-lg overflow-hidden border" style="border-color: var(--border);">
-          <img src={src} alt={title} class="w-full h-auto object-cover" loading="lazy" />
+        <div
+          class="gallery-img-wrap rounded-lg overflow-hidden border cursor-zoom-in"
+          style="border-color: var(--border);"
+          data-src={src}
+        >
+          <img src={src} alt={title} class="w-full h-auto object-cover transition-opacity duration-150 hover:opacity-85" loading="lazy" />
         </div>
       ))}
 
@@ -55,7 +59,25 @@ const hasMedia = (images?.length ?? 0) > 0 || (videos?.length ?? 0) > 0;
   </div>
 )}
 
+<div id="gallery-lightbox" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.88); align-items:center; justify-content:center; cursor:zoom-out;">
+  <img id="gallery-lightbox-img" src="" alt="" style="max-width:92vw; max-height:92vh; border-radius:0.5rem; box-shadow:0 0 80px rgba(0,0,0,0.8);" />
+</div>
+
 <script is:inline>
+  // Image lightbox
+  var lb = document.getElementById('gallery-lightbox');
+  var lbImg = document.getElementById('gallery-lightbox-img');
+  document.querySelectorAll('.gallery-img-wrap').forEach(function(wrap) {
+    wrap.addEventListener('click', function() {
+      lbImg.src = wrap.dataset.src;
+      lbImg.alt = wrap.querySelector('img').alt;
+      lb.style.display = 'flex';
+    });
+  });
+  lb.addEventListener('click', function() { lb.style.display = 'none'; });
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') lb.style.display = 'none'; });
+
+  // Video thumbs
   document.querySelectorAll('.video-thumb').forEach(function(thumb) {
     thumb.addEventListener('click', function() {
       var overlay  = thumb.querySelector('.thumb-overlay');

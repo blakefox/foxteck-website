@@ -5,8 +5,8 @@ companySlug: "foxteck"
 role: "Founder / CTO / Lead Engineer"
 startYear: 2025
 endYear: "present"
-order: 13
-tags: ["Claude AI", "Anthropic", "Agentic AI", "React", "Azure", "Google Classroom", "EdTech", "OCR"]
+order: 14
+tags: ["Claude / CoPilot AI", "Anthropic", "Agentic AI", "React", "Azure", "Google Classroom", "EdTech", "OCR"]
 domains: ["ai", "web", "startup", "leadership"]
 summary: "Founded and built an AI-powered grading platform for K-12 and higher ed — powered by Claude AI — that delivers gradebook-ready CSVs, class insights, and student critiques in minutes instead of hours."
 heroImage: "/assets/projects/foxteck-grading-assistant/logo.png"

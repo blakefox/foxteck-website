@@ -11,14 +11,23 @@ const { title, company, companySlug, role, startYear, endYear, tags, domains, su
 const yearRange = `${startYear} – ${endYear === 'present' ? 'Present' : endYear}`;
 
 const companyColors: Record<string, string> = {
-  ikin:    '#4A9EBF',
-  faceware:'#C04A1A',
-  ibm:     '#6AB8D4',
-  madcatz: '#8B949E',
-  foxteck: '#E8620A',
-  hia:     '#4A9EBF',
+  ikin:       '#4A9EBF',
+  faceware:   '#C04A1A',
+  ibm:        '#6AB8D4',
+  madcatz:    '#8B949E',
+  foxteck:    '#E8620A',
+  hia:        '#4A9EBF',
+  gamecloud:  '#5A8A5A',
+  'sony-online': '#00439C',
+  'us-navy':  '#1C2B5E',
 };
 const badgeColor = companyColors[companySlug] ?? '#8B949E';
+
+const companyLabels: Record<string, string> = {
+  'sony-online': 'Sony Online',
+  'us-navy':     'US Navy',
+};
+const badgeLabel = companyLabels[companySlug] ?? company.split(' ')[0];
 ---
 
 <article
@@ -79,23 +88,27 @@ const badgeColor = companyColors[companySlug] ?? '#8B949E';
         class="shrink-0 text-xs font-semibold px-2 py-0.5 rounded-full"
         style={`color: ${badgeColor}; background: ${badgeColor}22; border: 1px solid ${badgeColor}44;`}
       >
-        {company.split(' ')[0]}
+        {badgeLabel}
       </span>
     </div>
 
     <p class="text-sm leading-relaxed flex-1" style="color: var(--text-secondary);">{summary}</p>
 
-    <div class="flex flex-wrap gap-1.5">
-      {tags.slice(0, 4).map((tag) => (
-        <button
-          class="card-tag text-xs px-2 py-0.5 rounded transition-colors duration-150"
-          data-tag={tag.toLowerCase()}
-          style="background-color: var(--accent-subtle); color: var(--accent); border: none; cursor: pointer;"
-          onmouseover="this.style.backgroundColor='var(--accent)'; this.style.color='#fff';"
-          onmouseout="this.style.backgroundColor='var(--accent-subtle)'; this.style.color='var(--accent)';"
-        >
-          {tag}
-        </button>
+    <div class="flex flex-col gap-1.5">
+      {[tags.slice(0, 4), tags.slice(4, 8)].map((row) => (
+        <div class="tag-row flex flex-nowrap overflow-hidden gap-1.5">
+          {row.map((tag) => (
+            <button
+              class="card-tag shrink-0 text-xs px-2 py-0.5 rounded transition-colors duration-150"
+              data-tag={tag.toLowerCase()}
+              style="background-color: var(--accent-subtle); color: var(--accent); border: none; cursor: pointer;"
+              onmouseover="this.style.backgroundColor='var(--accent)'; this.style.color='#fff';"
+              onmouseout="this.style.backgroundColor='var(--accent-subtle)'; this.style.color='var(--accent)';"
+            >
+              {tag}
+            </button>
+          ))}
+        </div>
       ))}
     </div>
 
@@ -112,3 +125,21 @@ const badgeColor = companyColors[companySlug] ?? '#8B949E';
     </div>
   </div>
 </article>
+
+<script>
+  function trimTagRows() {
+    document.querySelectorAll('.tag-row').forEach((row) => {
+      const rowRight = row.getBoundingClientRect().right;
+      row.querySelectorAll('button').forEach((btn) => {
+        if (btn.getBoundingClientRect().right > rowRight) {
+          btn.style.display = 'none';
+        }
+      });
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', trimTagRows);
+  } else {
+    trimTagRows();
+  }
+</script>
