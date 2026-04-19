@@ -46,9 +46,10 @@ const companyLogo = `/assets/companies/${companySlug}.${logoExt}`;
 >
   <!-- Media preview -->
   <a href={`/projects/${project.slug}`} class="block relative aspect-video overflow-hidden bg-black">
-    <div class="absolute top-2 right-2 z-10 w-16 h-16 rounded-md overflow-hidden flex items-center justify-center" style="background:rgba(0,0,0,0.45); backdrop-filter:blur(4px);">
+    <!-- Company logo hidden for now -->
+    <!-- <div class="absolute top-2 right-2 z-10 w-16 h-16 rounded-md overflow-hidden flex items-center justify-center" style="background:rgba(0,0,0,0.45); backdrop-filter:blur(4px);">
       <img src={companyLogo} alt={company} class="w-full h-full object-contain p-0.5" />
-    </div>
+    </div> -->
     {heroVideo ? (
       <video
         src={heroVideo}

@@ -9,6 +9,11 @@ order: 4
 tags: ["WebGL", "Shader Development", "Multi-Display", "3D Visualization", "Oblong"]
 domains: ["web", "hardware"]
 summary: "Assisted installation and content creation for IBM's Austin immersion room — massive multi-screen environments powered by Oblong's gestural computing platform."
+heroImage: "/assets/projects/ibm-oblong/IBM_Oblong_hero.png"
+images:
+  - "/assets/projects/ibm-oblong/oblong-31.png"
+youtubeUrls:
+  - "https://www.youtube.com/watch?v=jFVl3gd_LTY&t=72s"
 externalUrl: "https://gamesbeat.com/how-oblong-helped-ibm-build-its-immersion-rooms-with-giant-displays/"
 featured: false
 ---

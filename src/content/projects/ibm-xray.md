@@ -9,6 +9,7 @@ order: 3
 tags: ["Three.js", "D3.js", "Node.js", "CouchDB", "NLP", "WebGL", "Watson AI"]
 domains: ["ai", "web"]
 summary: "Designed and built an interactive real-time visualization framework that pulled back the curtain on Watson AI — showing exactly how it breaks down language and reasons to answers."
+heroImage: "/assets/projects/ibm-xray/ibm-xray-hero.png"
 heroVideo: "/assets/projects/ibm-xray/walkthrough.mp4"
 videos:
   - "/assets/projects/ibm-xray/walkthrough.mp4"

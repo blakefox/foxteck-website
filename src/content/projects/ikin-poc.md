@@ -9,6 +9,7 @@ order: 13
 tags: ["Unity", "3D Rendering", "Holographic", "R&D", "Computer Vision"]
 domains: ["hardware", "games", "ai"]
 summary: "R&D proof-of-concept demos showcasing IKIN's holographic display capabilities — from interactive 3D objects to character animation — used to validate the platform and attract partners."
+heroImage: "/assets/projects/ikin-poc/IKIN_POC_Hero.png"
 heroVideo: "/assets/projects/ikin-poc/wine-bottle.mp4"
 videos:
   - "/assets/projects/ikin-poc/wine-bottle.mp4"
