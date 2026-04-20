@@ -1,0 +1,97 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('news', ({ data }) => !data.draft);
+  return posts.map((p) => ({ params: { slug: p.slug }, props: { post: p } }));
+}
+
+interface Props {
+  post: CollectionEntry<'news'>;
+}
+
+const { post } = Astro.props;
+const { title, date, category, heroImage, externalUrl } = post.data;
+const { Content } = await post.render();
+
+const allPosts = await getCollection('news', ({ data }) => !data.draft);
+const sorted = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const idx = sorted.findIndex((p) => p.slug === post.slug);
+const prev = idx < sorted.length - 1 ? sorted[idx + 1] : null;
+const next = idx > 0 ? sorted[idx - 1] : null;
+---
+
+<BaseLayout title={`${title} — Foxteck News`} description={post.data.summary} ogImage={heroImage}>
+
+  {heroImage && (
+    <div class="w-full bg-black overflow-hidden" style="max-height: 420px;">
+      <img src={heroImage} alt={title} class="w-full object-cover" style="max-height: 420px;" />
+    </div>
+  )}
+
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 py-12">
+
+    <!-- Back link -->
+    <a
+      href="/news"
+      class="inline-flex items-center gap-1.5 text-sm mb-8 transition-colors duration-150"
+      style="color: var(--text-secondary);"
+      onmouseover="this.style.color='var(--accent)'"
+      onmouseout="this.style.color='var(--text-secondary)'"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      All News
+    </a>
+
+    <!-- Meta -->
+    <div class="flex flex-wrap items-center gap-3 mb-3">
+      {category && (
+        <span class="text-xs font-semibold uppercase tracking-widest" style="color: var(--accent);">{category}</span>
+      )}
+      <time class="text-xs" style="color: var(--text-secondary);">
+        {date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+      </time>
+    </div>
+
+    <!-- Title -->
+    <h1 class="text-3xl sm:text-4xl font-bold mb-6 leading-tight" style="color: var(--text-primary);">{title}</h1>
+
+    {externalUrl && (
+      <a
+        href={externalUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-1.5 text-sm font-semibold mb-8 transition-colors duration-150"
+        style="color: var(--highlight);"
+      >
+        View External Link
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+    )}
+
+    <!-- Body -->
+    <div class="prose prose-neutral dark:prose-invert max-w-none">
+      <Content />
+    </div>
+
+    <!-- Prev / Next -->
+    {(prev || next) && (
+      <div class="mt-16 pt-8 border-t grid grid-cols-1 sm:grid-cols-2 gap-6" style="border-color: var(--border);">
+        {prev && (
+          <a href={`/news/${prev.slug}`} class="group flex flex-col gap-1 p-4 rounded-xl border transition-colors duration-150" style="border-color: var(--border);">
+            <span class="text-xs uppercase tracking-widest" style="color: var(--text-secondary);">Older</span>
+            <span class="text-sm font-semibold transition-colors duration-150 group-hover:underline" style="color: var(--text-primary);">{prev.data.title}</span>
+          </a>
+        )}
+        {next && (
+          <a href={`/news/${next.slug}`} class="group flex flex-col gap-1 p-4 rounded-xl border transition-colors duration-150 sm:text-right sm:ml-auto sm:w-full" style="border-color: var(--border);">
+            <span class="text-xs uppercase tracking-widest" style="color: var(--text-secondary);">Newer</span>
+            <span class="text-sm font-semibold transition-colors duration-150 group-hover:underline" style="color: var(--text-primary);">{next.data.title}</span>
+          </a>
+        )}
+      </div>
+    )}
+
+  </div>
+</BaseLayout>

@@ -1,0 +1,129 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const allNews = await getCollection('news', ({ data }) => !data.draft);
+const posts = allNews.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const categories = ['all', ...new Set(allNews.map((p) => p.data.category).filter(Boolean))] as string[];
+---
+
+<BaseLayout
+  title="News — Foxteck"
+  description="Updates, announcements, and articles from Foxteck and Blake Fox."
+>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+
+    <!-- Header -->
+    <div class="mb-10">
+      <p class="text-xs font-semibold uppercase tracking-widest mb-2" style="color: var(--accent);">Updates</p>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-3" style="color: var(--text-primary);">News</h1>
+      <p class="text-base max-w-xl" style="color: var(--text-secondary);">
+        Announcements, articles, and updates from Foxteck and Blake Fox.
+      </p>
+    </div>
+
+    <!-- Category filters -->
+    {categories.length > 1 && (
+      <div class="flex flex-wrap gap-2 mb-8" id="category-filters">
+        {categories.map((cat) => (
+          <button
+            class="cat-btn px-3 py-1.5 rounded-md text-xs font-semibold uppercase tracking-wide border transition-colors duration-150"
+            data-filter={cat}
+            data-active={cat === 'all' ? 'true' : 'false'}
+            style={cat === 'all'
+              ? 'background-color: var(--accent); color: #fff; border-color: var(--accent);'
+              : 'background: transparent; color: var(--text-secondary); border-color: var(--border);'}
+          >
+            {cat === 'all' ? 'All' : cat}
+          </button>
+        ))}
+      </div>
+    )}
+
+    <!-- Post list -->
+    <div id="news-list" class="flex flex-col gap-6">
+      {posts.map((post) => (
+        <article
+          class="news-card group rounded-xl border p-6 transition-colors duration-150"
+          data-category={post.data.category?.toLowerCase() ?? ''}
+          style="border-color: var(--border); background-color: var(--bg-secondary);"
+        >
+          <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+            <div class="flex-1 min-w-0">
+              <div class="flex flex-wrap items-center gap-3 mb-2">
+                {post.data.category && (
+                  <span class="text-xs font-semibold uppercase tracking-widest" style="color: var(--accent);">
+                    {post.data.category}
+                  </span>
+                )}
+                <time class="text-xs" style="color: var(--text-secondary);">
+                  {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                </time>
+              </div>
+              <h2 class="text-xl font-bold mb-2 leading-snug" style="color: var(--text-primary);">
+                <a
+                  href={`/news/${post.slug}`}
+                  class="transition-colors duration-150"
+                  onmouseover="this.style.color='var(--accent)'"
+                  onmouseout="this.style.color='var(--text-primary)'"
+                >
+                  {post.data.title}
+                </a>
+              </h2>
+              <p class="text-sm leading-relaxed" style="color: var(--text-secondary);">
+                {post.data.summary}
+              </p>
+            </div>
+            {post.data.heroImage && (
+              <img
+                src={post.data.heroImage}
+                alt={post.data.title}
+                class="w-full sm:w-40 h-28 object-cover rounded-lg shrink-0"
+              />
+            )}
+          </div>
+          <div class="mt-4">
+            <a
+              href={`/news/${post.slug}`}
+              class="text-sm font-semibold transition-colors duration-150"
+              style="color: var(--accent);"
+              onmouseover="this.style.color='var(--highlight)'"
+              onmouseout="this.style.color='var(--accent)'"
+            >
+              Read more →
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    {posts.length === 0 && (
+      <div class="py-20 text-center">
+        <p style="color: var(--text-secondary);">No posts yet — check back soon.</p>
+      </div>
+    )}
+
+  </div>
+</BaseLayout>
+
+<script is:inline>
+  var activeCategory = 'all';
+
+  document.querySelectorAll('.cat-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      activeCategory = btn.dataset.filter;
+      document.querySelectorAll('.cat-btn').forEach(function(b) {
+        var isActive = b.dataset.filter === activeCategory;
+        b.dataset.active = isActive ? 'true' : 'false';
+        b.style.cssText = isActive
+          ? 'background-color: var(--accent); color: #fff; border-color: var(--accent);'
+          : 'background: transparent; color: var(--text-secondary); border-color: var(--border);';
+      });
+      document.querySelectorAll('.news-card').forEach(function(card) {
+        var match = activeCategory === 'all' || card.dataset.category === activeCategory.toLowerCase();
+        card.style.display = match ? '' : 'none';
+      });
+    });
+  });
+</script>
