@@ -20,9 +20,31 @@ const sorted = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTi
 const idx = sorted.findIndex((p) => p.slug === post.slug);
 const prev = idx < sorted.length - 1 ? sorted[idx + 1] : null;
 const next = idx > 0 ? sorted[idx - 1] : null;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'NewsArticle',
+  headline: title,
+  description: post.data.summary,
+  datePublished: date.toISOString(),
+  url: canonicalURL.toString(),
+  image: heroImage ? new URL(heroImage, Astro.site).toString() : new URL('/assets/personal/blake-fox-headshot.png', Astro.site).toString(),
+  author: {
+    '@type': 'Person',
+    name: 'Blake Fox',
+    url: 'https://www.foxteck.com',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Foxteck Innovations Inc',
+    url: 'https://www.foxteck.com',
+  },
+};
 ---
 
-<BaseLayout title={`${title} — Foxteck News`} description={post.data.summary} ogImage={heroImage}>
+<BaseLayout title={`${title} — Foxteck News`} description={post.data.summary} ogImage={heroImage} ogType="article" publishedDate={date}>
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
 
   {heroImage && (
     <div class="w-full bg-black overflow-hidden" style="max-height: 420px;">
