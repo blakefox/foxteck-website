@@ -17,6 +17,7 @@ images:
   - "/assets/projects/foxteck-livestalk/architecture-diagram.png"
 youtubeUrls:
   - "https://www.youtube.com/watch?v=clW1V3FW2qU"
+externalUrl: "https://www.livestalk.org"
 featured: false
 ---
 
