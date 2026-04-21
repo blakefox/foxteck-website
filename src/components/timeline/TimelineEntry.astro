@@ -41,7 +41,7 @@ const companyLogo = logoMap[stop.id];
       style="background-color: var(--bg-surface); border-color: var(--border);"
     >
       {companyLogo && (
-        <div class={`absolute top-3 ${isRight ? 'right-3' : 'left-3'} w-[60px] h-[60px] rounded-md overflow-hidden flex items-center justify-center`} style="background:rgba(0,0,0,0.08);">
+        <div class={`absolute top-3 right-3 ${!isRight ? 'md:right-auto md:left-3' : ''} w-[60px] h-[60px] rounded-md overflow-hidden flex items-center justify-center`} style="background:rgba(0,0,0,0.08);">
           <img src={companyLogo} alt={stop.company} class="w-full h-full object-contain p-0.5" />
         </div>
       )}

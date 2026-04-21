@@ -21,7 +21,7 @@ const recs = [
     {recs.map((rec) => (
       <div
         class="shrink-0 snap-start rounded-xl overflow-hidden border"
-        style="width: clamp(280px, 70vw, 400px); border-color: var(--border); background-color: var(--bg-surface);"
+        style="width: clamp(560px, 70vw, 800px); border-color: var(--border); background-color: #1B1F23;"
       >
         <img
           src={rec.src}
@@ -59,7 +59,7 @@ const recs = [
   var prev   = document.getElementById('rec-prev');
   var next   = document.getElementById('rec-next');
   if (scroll && prev && next) {
-    var step = 420;
+    var step = 820;
     prev.addEventListener('click', function() { scroll.scrollBy({ left: -step, behavior: 'smooth' }); });
     next.addEventListener('click', function() { scroll.scrollBy({ left:  step, behavior: 'smooth' }); });
   }
