@@ -15,6 +15,7 @@ images:
   - "/assets/projects/foxteck-livestalk/postcard.png"
   - "/assets/projects/foxteck-livestalk/banner.png"
   - "/assets/projects/foxteck-livestalk/architecture-diagram.png"
+  - "/assets/projects/foxteck-livestalk/slide-team.png"
 youtubeUrls:
   - "https://www.youtube.com/watch?v=clW1V3FW2qU"
 externalUrl: "https://www.livestalk.org"
